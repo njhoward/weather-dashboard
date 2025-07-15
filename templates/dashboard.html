@@ -12,10 +12,17 @@
     <h1>Home Weather Dashboard</h1>
 
     <div class="card">
-        <h2>Outdoor (BoM)</h2>
+        <h2>{{ weather.location }} Weather</h2>
         <p>Temp: {{ weather.temp }}°C</p>
         <p>Humidity: {{ weather.humidity }}%</p>
         <p>Conditions: {{ weather.summary }}</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ weather.location }} Wind</h2>
+        <p>Wind Speed: {{ weather.windkmh }} km/h</p>
+        <p>Direction: {{ weather.winddir }}%</p>
+        <p>Gusts: {{ weather.gustkmh }} km/h</p>
     </div>
 
     <div class="card">
