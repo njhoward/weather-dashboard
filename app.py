@@ -31,7 +31,8 @@ def dashboard():
                 "summary": latest.get("weather", "N/A"),
                 "windkmh": latest.get("wind_spd_kmh", "N/A"),
                 "winddir": latest.get("wind_dir", "N/A"),
-                "gustkmh": latest.get("gust_kmh", "N/A")
+                "gustkmh": latest.get("gust_kmh", "N/A"),
+                "pressure": latest.get("press", "N/A")
             }
         else:
             print("BoM JSON structure missing 'data'")
