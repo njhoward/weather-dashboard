@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Dashboard</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; background-color: #eef; padding: 2em; }
-        .card { background: white; border-radius: 10px; padding: 1em; margin: 1em auto; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h2 { margin-bottom: 0.5em; }
-    </style>
+    <title>Home Weather Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Home Weather Dashboard</h1>
 
-    <div class="card">
-        <h2>{{ weather.location }} Weather</h2>
-        <p>Temp: {{ weather.temp }}°C</p>
-        <p>Humidity: {{ weather.humidity }}%</p>
-        <p>Conditions: {{ weather.summary }}</p>
-    </div>
+    <div class="grid">
+        <div class="card">
+            <div class="icon">🌤️</div>
+            <h2>{{ weather.location }} Weather</h2>
+            <p>Temp: {{ weather.temp }}°C</p>
+            <p>Humidity: {{ weather.humidity }}%</p>
+            <p>Conditions: {{ weather.summary }}</p>
+        </div>
 
-    <div class="card">
-        <h2>{{ weather.location }} Wind</h2>
-        <p>Wind Speed: {{ weather.windkmh }} km/h</p>
-        <p>Direction: {{ weather.winddir }}%</p>
-        <p>Gusts: {{ weather.gustkmh }} km/h</p>
-    </div>
+        <div class="card">
+             <div class="icon">💨</div>
+            <h2>{{ weather.location }} Wind</h2>
+            <p>Wind Speed: {{ weather.windkmh }} km/h</p>
+            <p>Direction: {{ weather.winddir }}%</p>
+            <p>Gusts: {{ weather.gustkmh }} km/h</p>
+        </div>
 
-    <div class="card">
-        <h2>Indoor</h2>
-        <p>Temp: {{ indoor.temp }}°C</p>
-        <p>Humidity: {{ indoor.humidity }}%</p>
-        <p>Air Quality Index: {{ indoor.aqi }}</p>
+        <div class="card">
+            <div class="icon">🏠</div>
+            <h2>Indoor</h2>
+            <p>Temp: {{ indoor.temp }}°C</p>
+            <p>Humidity: {{ indoor.humidity }}%</p>
+            <p>Air Quality Index: {{ indoor.aqi }}</p>
+        </div>
     </div>
 </body>
 </html>
