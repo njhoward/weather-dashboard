@@ -24,7 +24,6 @@ def dashboard():
                 "max_temps": data["daily"]["temperature_2m_max"],
                 "rainfall": data["daily"]["precipitation_sum"]
             }
-            print(json.dumps(data, indent=2))
     except Exception as e:
         print(f"Error fetching Open-Meteo forecast: {e}")
     
