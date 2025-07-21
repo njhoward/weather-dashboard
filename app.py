@@ -60,7 +60,7 @@ def dashboard():
 
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
-    return render_template("dashboard.html", weather=weather, indoor=indoor)
+    return render_template("dashboard.html", weather=weather, indoor=indoor, forecast=forecast_data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
