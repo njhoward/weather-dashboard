@@ -2,6 +2,7 @@
 
 import requests
 import json
+from datetime import datetime
 from flask import Flask, render_template
 
 from config import BOM_JSON_URL, OPEN_METEO_FORECAST_URL
@@ -19,8 +20,8 @@ def dashboard():
         if response.status_code == 200:
             data = response.json()
             forecast_data = {
-                "dates": data["daily"]["time"],
-                "min_temps": data["daily"]["temperature_2m_min"],
+                "dates": [datetime.strptime(d, "%Y-%m-%d").strftime("%a") for d in data["daily"]["time"]],
+                    "min_temps": data["daily"]["temperature_2m_min"],
                 "max_temps": data["daily"]["temperature_2m_max"],
                 "rainfall": data["daily"]["precipitation_sum"]
             }

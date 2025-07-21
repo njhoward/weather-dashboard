@@ -14,15 +14,33 @@
             <div class="icon">📅</div>
             <h2>Forecast</h2>
             <table style="margin: auto;">
-                <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th></tr>
-                {% for i in range(5) %}
                 <tr>
-                    <td>{{ forecast.dates[i] }}</td>
-                    <td>{{ forecast.min_temps[i] }}°</td>
-                    <td>{{ forecast.max_temps[i] }}°</td>
-                    <td>{{ forecast.rainfall[i] }} mm</td>
+                    <th></th>
+                    {% for i in range(5) %}
+                        <th>{{ forecast.dates[i] }}</th>
+                    {% endfor %}
                 </tr>
-                {% endfor %}
+
+                <tr>
+                    <td>Min</td>
+                    {% for i in range(5) %}
+                        <td>{{ forecast.min_temps[i] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td>Max</td>
+                    {% for i in range(5) %}
+                        <td>{{ forecast.max_temps[i] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td>Rain</td>
+                    {% for i in range(5) %}
+                        <td>{{ forecast.rainfall[i] }}</td>
+                    {% endfor %}
+                </tr>
             </table>
         </div>
 
