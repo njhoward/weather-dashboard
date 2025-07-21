@@ -11,52 +11,53 @@
     <div class="grid">
 
         <div class="card">
-            <div class="icon">📅</div>
-            <h2>Forecast</h2>
-            <table style="margin: auto;">
-                <tr>
-                    <th></th>
-                    {% for i in range(5) %}
-                        <th>{{ forecast.dates[i] }}</th>
-                    {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>Min</td>
-                    {% for i in range(5) %}
-                        <td>{{ forecast.min_temps[i] }}</td>
-                    {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>Max</td>
-                    {% for i in range(5) %}
-                        <td>{{ forecast.max_temps[i] }}</td>
-                    {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>Rain</td>
-                    {% for i in range(5) %}
-                        <td>{{ forecast.rainfall[i] }}</td>
-                    {% endfor %}
-                </tr>
-            </table>
-        </div>
-
-        <div class="card">
-            <div class="icon">{{ moon.icon }}</div>
-            <h2>Moon Phase</h2>
-            <p>{{ moon.description }}</p>
-        </div>
-
-        <div class="card">
             <div class="icon">🌤️</div>
             <h2>{{ weather.location }} Weather</h2>
             <p>Temp: {{ weather.temp }}°C</p>
             <p>Humidity: {{ weather.humidity }}%</p>
             <p>Conditions: {{ weather.summary }}</p>
         </div>
+
+        <div class="card">
+            <div class="icon">📅</div>
+            <h2>Forecast</h2>
+            <table style="margin: auto;">
+                <tr>
+                    <th></th>
+                    {% for i in range(5) %}
+                        <th>{{ forecast.dates[i+1] }}</th>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td>Min</td>
+                    {% for i in range(5) %}
+                        <td>{{ forecast.min_temps[i+1] }}°</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td>Max</td>
+                    {% for i in range(5) %}
+                        <td>{{ forecast.max_temps[i+1] }}°</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td>Rain</td>
+                    {% for i in range(5) %}
+                        <td>{{ forecast.rainfall[i+1] }} mm</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Moon Phase</h2>
+            <div class="moonicon">{{ moon.icon }}</div>
+            <p>{{ moon.description }}</p>
+        </div>
+
 
         <div class="card">
              <div class="icon">💨</div>
