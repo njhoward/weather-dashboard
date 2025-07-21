@@ -3,7 +3,7 @@ import ephem
 import datetime
 
 def get_moon_phase():
-    moon = ephem.Moon(datetime.utcnow())
+    moon = ephem.Moon(datetime.datetime.utcnow())
     phase = moon.phase  # 0 = new moon, 50 = half, 100 = full
 
     if phase < 1:
