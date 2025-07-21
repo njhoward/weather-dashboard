@@ -1,6 +1,7 @@
 # app.py
 
 import requests
+import json
 from flask import Flask, render_template
 
 from config import BOM_JSON_URL, OPEN_METEO_FORECAST_URL
@@ -22,6 +23,7 @@ def dashboard():
                 "max_temps": data["daily"]["temperature_2m_max"],
                 "rainfall": data["daily"]["precipitation_sum"]
             }
+            print(json.dumps(data, indent=2))
     except Exception as e:
         print(f"Error fetching Open-Meteo forecast: {e}")
     
