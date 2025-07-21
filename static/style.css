@@ -14,18 +14,28 @@ h1 {
     color: #00d2ff;
 }
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    flex-direction: row;
     gap: 1em;
     width: 100%;
-    max-width: 1200px;
+    overflow-x: auto;
+    padding-bottom: 1em;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
+
+.grid::-webkit-scrollbar {
+    display: none;
+}
+
+
 .card {
     background: #1e1e1e;
     border-radius: 15px;
     padding: 1em;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     text-align: center;
+    min-width: 280px;
+    flex: 0 0 auto; /* Prevent card from shrinking */
 }
 .card h2 {
     font-size: 1.4em;
