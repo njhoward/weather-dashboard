@@ -13,20 +13,23 @@ h1 {
     margin-bottom: 1em;
     color: #00d2ff;
 }
+
 .grid {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    grid-template-rows: repeat(2, auto);
     gap: 1em;
-    width: 100%;
     overflow-x: auto;
     padding-bottom: 1em;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-height: calc(100vh - 5em); /* keep height in check */
 }
 
 .grid::-webkit-scrollbar {
     display: none;
 }
-
 
 .card {
     background: #1e1e1e;
@@ -34,9 +37,11 @@ h1 {
     padding: 1em;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     text-align: center;
-    min-width: 280px;
-    flex: 0 0 auto; /* Prevent card from shrinking */
+    width: 280px;
+    height: 180px;
+    box-sizing: border-box;
 }
+
 .card h2 {
     font-size: 1.4em;
     margin-bottom: 0.5em;
