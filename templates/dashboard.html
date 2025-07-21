@@ -9,6 +9,24 @@
     <h1>Home Weather Dashboard</h1>
 
     <div class="grid">
+
+        <div class="card">
+            <div class="icon">📅</div>
+            <h2>Forecast</h2>
+            <table style="margin: auto;">
+                <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th></tr>
+                {% for i in range(5) %}
+                <tr>
+                    <td>{{ forecast.dates[i] }}</td>
+                    <td>{{ forecast.min_temps[i] }}°</td>
+                    <td>{{ forecast.max_temps[i] }}°</td>
+                    <td>{{ forecast.rainfall[i] }} mm</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
         <div class="card">
             <div class="icon">🌤️</div>
             <h2>{{ weather.location }} Weather</h2>

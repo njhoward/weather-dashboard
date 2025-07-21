@@ -3,13 +3,29 @@
 import requests
 from flask import Flask, render_template
 
-from config import BOM_JSON_URL
+from config import BOM_JSON_URL, OPEN_METEO_FORECAST_URL
 
 
 app = Flask(__name__)
 
 @app.route("/")
 def dashboard():
+    #forecast information
+    forecast_data = {}
+    try:
+        response = requests.get(OPEN_METEO_FORECAST_URL, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            forecast_data = {
+                "dates": data["daily"]["time"],
+                "min_temps": data["daily"]["temperature_2m_min"],
+                "max_temps": data["daily"]["temperature_2m_max"],
+                "rainfall": data["daily"]["precipitation_sum"]
+            }
+    except Exception as e:
+        print(f"Error fetching Open-Meteo forecast: {e}")
+    
+    # current observations
     try:
         headers = {"User-Agent": "Mozilla/5.0"}
         url = BOM_JSON_URL
