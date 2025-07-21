@@ -5,6 +5,7 @@ import json
 from flask import Flask, render_template
 
 from config import BOM_JSON_URL, OPEN_METEO_FORECAST_URL
+from moon import get_moon_phase
 
 
 app = Flask(__name__)
@@ -60,9 +61,11 @@ def dashboard():
         print("BoM fetch error:", e)
         weather = {"temp": "N/A", "humidity": "N/A", "summary": "Unavailable"}
 
+    moon_phase = get_moon_phase()
+
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
-    return render_template("dashboard.html", weather=weather, indoor=indoor, forecast=forecast_data)
+    return render_template("dashboard.html", weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
