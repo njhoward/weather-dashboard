@@ -8,78 +8,93 @@
 <body>
     <h1>Home Weather Dashboard</h1>
 
-    <div class="grid">
 
-        <div class="card">
-            <div class="icon">🌤️</div>
-            <h2>{{ weather.location }} Weather</h2>
-            <p>Temp: {{ weather.temp }}°C</p>
-            <p>Humidity: {{ weather.humidity }}%</p>
-            <p>Conditions: {{ weather.summary }}</p>
+
+    <div class="pages">
+        <div class="page">
+
+            <div class="card">
+                <div class="icon">🌤️</div>
+                <h2>{{ weather.location }} Weather</h2>
+                <p>Temp: {{ weather.temp }}°C</p>
+                <p>Humidity: {{ weather.humidity }}%</p>
+                <p>Conditions: {{ weather.summary }}</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📅</div>
+                <h2>Forecast</h2>
+                <table style="margin: auto;">
+                    <tr>
+                        <th></th>
+                        {% for i in range(5) %}
+                            <th>{{ forecast.dates[i+1] }}</th>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Min</td>
+                        {% for i in range(5) %}
+                            <td>{{ forecast.min_temps[i+1] }}°</td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Max</td>
+                        {% for i in range(5) %}
+                            <td>{{ forecast.max_temps[i+1] }}°</td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Rain</td>
+                        {% for i in range(5) %}
+                            <td>{{ forecast.rainfall[i+1] }}mm</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Moon Phase</h2>
+                <div class="moonicon">{{ moon.icon }}</div>
+                <p>{{ moon.description }}</p>
+            </div>
+
+
+            <div class="card">
+                <div class="icon">💨</div>
+                <h2>{{ weather.location }} Wind</h2>
+                <p>Wind Speed: {{ weather.windkmh }} km/h</p>
+                <p>Direction: {{ weather.winddir }}%</p>
+                <p>Gusts: {{ weather.gustkmh }} km/h</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌡️</div>
+                <h2>{{ weather.location }} Pressure</h2>
+                <p>Pressure: {{ weather.pressure }} hPa</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🏠</div>
+                <h2>Indoor</h2>
+                <p>Temp: {{ indoor.temp }}°C</p>
+                <p>Humidity: {{ indoor.humidity }}%</p>
+                <p>Air Quality Index: {{ indoor.aqi }}</p>
+            </div>
         </div>
 
-        <div class="card">
-            <div class="icon">📅</div>
-            <h2>Forecast</h2>
-            <table style="margin: auto;">
-                <tr>
-                    <th></th>
-                    {% for i in range(5) %}
-                        <th>{{ forecast.dates[i+1] }}</th>
-                    {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>Min</td>
-                    {% for i in range(5) %}
-                        <td>{{ forecast.min_temps[i+1] }}°</td>
-                    {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>Max</td>
-                    {% for i in range(5) %}
-                        <td>{{ forecast.max_temps[i+1] }}°</td>
-                    {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>Rain</td>
-                    {% for i in range(5) %}
-                        <td>{{ forecast.rainfall[i+1] }}mm</td>
-                    {% endfor %}
-                </tr>
-            </table>
-        </div>
-
-        <div class="card">
-            <h2>Moon Phase</h2>
-            <div class="moonicon">{{ moon.icon }}</div>
-            <p>{{ moon.description }}</p>
+        <div class="page">
+            <div class="card">🌧️<p>Rainfall</p><h2>rain mm</h2></div>
+            <div class="card">🌫️<p>Feels Like</p><h2>feels like °C</h2></div>
+            <div class="card">🔻<p>Pressure</p><h2>pressue hPa</h2></div>
+            <div class="card">📶<p>Signal</p><h2>signal</h2></div>
+            <div class="card">🌙<p>Moon Phase</p><h2>moon</h2></div>
+            <div class="card">📅<p>Forecast</p><h2>forecast</h2></div>
         </div>
 
 
-        <div class="card">
-             <div class="icon">💨</div>
-            <h2>{{ weather.location }} Wind</h2>
-            <p>Wind Speed: {{ weather.windkmh }} km/h</p>
-            <p>Direction: {{ weather.winddir }}%</p>
-            <p>Gusts: {{ weather.gustkmh }} km/h</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🌡️</div>
-            <h2>{{ weather.location }} Pressure</h2>
-            <p>Pressure: {{ weather.pressure }} hPa</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🏠</div>
-            <h2>Indoor</h2>
-            <p>Temp: {{ indoor.temp }}°C</p>
-            <p>Humidity: {{ indoor.humidity }}%</p>
-            <p>Air Quality Index: {{ indoor.aqi }}</p>
-        </div>
     </div>
 </body>
 </html>
