@@ -8,12 +8,18 @@ body {
 
 .pages {
     display: flex;
-    overflow-x: hidden;
+    overflow-x: auto;
     /*scroll-snap-type: x mandatory;*/
+    scroll-behavior: smooth;
     width: 100vw;
     height: 100vh;
     touch-action: none; 
     position: relative;
+    scrollbar-width: none;
+}
+
+.pages::-webkit-scrollbar {
+    display: none;
 }
 
 .page {
@@ -26,29 +32,6 @@ body {
     box-sizing: border-box;
     scroll-snap-align: start;
     height: calc(100vh - 120px);
-}
-
-h1 {
-    font-size: 2em;
-    margin-bottom: 1em;
-    color: #00d2ff;
-}
-
-.grid {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: min-content;
-    grid-template-rows: repeat(2, auto);
-    gap: 1em;
-    overflow-x: auto;
-    padding-bottom: 1em;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-    max-height: calc(100vh - 5em); /* keep height in check */
-}
-
-.grid::-webkit-scrollbar {
-    display: none;
 }
 
 .card {
