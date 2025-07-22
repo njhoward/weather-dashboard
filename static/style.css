@@ -23,17 +23,8 @@ body {
     padding: 1em;
     box-sizing: border-box;
     scroll-snap-align: start;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 120px);
 }
-
-@media (min-width: 1025px) {
-    .page {
-        max-width: 1200px;
-        margin: auto;
-        height: 100vh;
-    }
-}
-
 
 h1 {
     font-size: 2em;
