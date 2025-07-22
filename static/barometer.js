@@ -6,66 +6,105 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const ctx = canvas.getContext('2d');
     const pressure = parseFloat(canvas.dataset.pressure) || 1013.25;
+    const trend = canvas.dataset.trend || 'steady';
+    const previous = parseFloat(canvas.dataset.previous) || pressure;
 
     const minPressure = 960;
     const maxPressure = 1060;
 
-    const percent = (pressure - minPressure) / (maxPressure - minPressure);
-    const angleDeg = percent * 270 + 135; // 135° to 405° (dial arc)
-    const angleRad = angleDeg * Math.PI / 180;
-
-    const radius = 90;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
+    const radius = 90;
 
-    // Clear and draw base circle
+    const toAngle = (value) => {
+        const percent = (value - minPressure) / (maxPressure - minPressure);
+        return (percent * 270 + 135) * Math.PI / 180;
+    };
+
+    const pressureAngle = toAngle(pressure);
+    const previousAngle = toAngle(previous);
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw outer arc
+    // --- Arc background ---
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 135 * Math.PI / 180, 405 * Math.PI / 180);
     ctx.strokeStyle = '#eee';
     ctx.lineWidth = 20;
     ctx.stroke();
 
-    // Draw tick marks (every 10 hPa)
+    // --- Tick marks & labels ---
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#999';
     ctx.font = '10px sans-serif';
     ctx.fillStyle = '#ccc';
+
     for (let p = minPressure; p <= maxPressure; p += 10) {
-        const pct = (p - minPressure) / (maxPressure - minPressure);
-        const tickAngle = (pct * 270 + 135) * Math.PI / 180;
-        const x1 = centerX + Math.cos(tickAngle) * (radius - 10);
-        const y1 = centerY + Math.sin(tickAngle) * (radius - 10);
-        const x2 = centerX + Math.cos(tickAngle) * (radius);
-        const y2 = centerY + Math.sin(tickAngle) * (radius);
+        const angle = toAngle(p);
+        const x1 = centerX + Math.cos(angle) * (radius - 10);
+        const y1 = centerY + Math.sin(angle) * (radius - 10);
+        const x2 = centerX + Math.cos(angle) * (radius);
+        const y2 = centerY + Math.sin(angle) * (radius);
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
 
-        const labelX = centerX + Math.cos(tickAngle) * (radius - 25);
-        const labelY = centerY + Math.sin(tickAngle) * (radius - 25);
+        const labelX = centerX + Math.cos(angle) * (radius - 25);
+        const labelY = centerY + Math.sin(angle) * (radius - 25);
         ctx.fillText(p.toString(), labelX - 8, labelY + 4);
     }
 
-    // Draw needle
+    // --- Weather icons ---
+    const icons = {
+        980: '🌧️',
+        1000: '☁️',
+        1020: '☀️',
+        1040: '☀️'
+    };
+
+    ctx.font = '18px sans-serif';
+    for (const p in icons) {
+        const angle = toAngle(Number(p));
+        const iconX = centerX + Math.cos(angle) * (radius - 40);
+        const iconY = centerY + Math.sin(angle) * (radius - 40);
+        ctx.fillText(icons[p], iconX - 10, iconY + 6);
+    }
+
+    // --- Blue previous needle ---
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
-    ctx.lineTo(centerX + Math.cos(angleRad) * (radius - 20), centerY + Math.sin(angleRad) * (radius - 20));
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 3;
+    ctx.lineTo(centerX + Math.cos(previousAngle) * (radius - 20), centerY + Math.sin(previousAngle) * (radius - 20));
+    ctx.strokeStyle = 'rgba(0, 150, 255, 0.5)';
+    ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Center dot
+    // --- Red current needle (prominent) ---
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX + Math.cos(pressureAngle) * (radius - 20), centerY + Math.sin(pressureAngle) * (radius - 20));
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    // --- Center hub ---
     ctx.beginPath();
     ctx.arc(centerX, centerY, 4, 0, 2 * Math.PI);
     ctx.fillStyle = 'red';
     ctx.fill();
 
-    // Pressure text
+    // --- Pressure text and trend ---
     ctx.font = '16px sans-serif';
     ctx.fillStyle = '#0ff';
-    ctx.fillText(`${pressure.toFixed(1)} hPa`, centerX - 35, centerY + 60);
+    ctx.fillText(`${pressure.toFixed(1)} hPa`, centerX - 40, centerY + 60);
+
+    // Trend arrow + label
+    ctx.font = '14px sans-serif';
+    const trendText = {
+        rising: '⬆️ Rising',
+        falling: '⬇️ Falling',
+        steady: '➡️ Steady'
+    };
+    ctx.fillStyle = trend === 'rising' ? 'lime' : trend === 'falling' ? 'red' : 'gray';
+    ctx.fillText(trendText[trend], centerX - 35, centerY + 80);
 });

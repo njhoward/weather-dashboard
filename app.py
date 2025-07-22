@@ -44,6 +44,10 @@ def dashboard():
 
         if readings:
             latest = readings[0]
+
+            recent = [r for r in readings if r.get("press") is not None][:6]
+            pressure_now = float(recent[0]["press"])
+            pressure_5ago = float(recent[-1]["press"]) if len(recent) >= 6 else pressure_now
             pressure_trend = get_pressure_trend(readings)
 
             weather = {
@@ -54,7 +58,9 @@ def dashboard():
                 "windkmh": latest.get("wind_spd_kmh", "N/A"),
                 "winddir": latest.get("wind_dir", "N/A"),
                 "gustkmh": latest.get("gust_kmh", "N/A"),
-                "pressure": latest.get("press", "N/A"),
+                # "pressure": latest.get("press", "N/A"),
+                "pressure": pressure_now,
+                "pressure_2h_ago": pressure_5ago,
                 "pressure_trend": pressure_trend
             }
         else:

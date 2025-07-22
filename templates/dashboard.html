@@ -95,7 +95,13 @@
 
             <div class="card">
                 <h2>Pressure Barometer</h2>
-                <canvas id="barometerGauge" width="200" height="200" data-pressure="{{ weather.pressure }}"></canvas>
+                <canvas id="barometerGauge"
+                        width="200" height="200"
+                        data-pressure="{{ weather.pressure }}"
+                        data-trend="{{ weather.pressure_trend }}"
+                        data-previous="{{ weather.pressure_2h_ago }}">
+                </canvas>
+
             </div>
 
 
