@@ -47,6 +47,17 @@ h1 {
     margin-bottom: 0.5em;
     color: #76e7ff;
 }
+
+.card table {
+    font-size: 0.85em;
+    letter-spacing: 0.3px;
+}
+
+.card td, .card th {
+    padding: 0.3em 0.4em;
+    font-weight: normal;
+}
+
 .icon {
     font-size: 2em;
     margin-bottom: 0.3em;
