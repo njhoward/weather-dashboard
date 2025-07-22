@@ -22,16 +22,16 @@
         <div class="page">
 
             <div class="card">
-                <div class="icon">🌤️</div>
                 <h2>{{ weather.location }} Weather</h2>
+                <div class="icon">🌤️</div>
                 <p>Temp: {{ weather.temp }}°C</p>
                 <p>Humidity: {{ weather.humidity }}%</p>
                 <p>Conditions: {{ weather.summary }}</p>
             </div>
 
             <div class="card">
-                <div class="icon">💨</div>
                 <h2>{{ weather.location }} Wind</h2>
+                <div class="icon">💨</div>
                 <p>Wind Speed: {{ weather.windkmh }} km/h</p>
                 <p>Direction: {{ weather.winddir }}%</p>
                 <p>Gusts: {{ weather.gustkmh }} km/h</p>
@@ -44,8 +44,8 @@
             </div>
 
             <div class="card">
-                <div class="icon">📅</div>
                 <h2>Forecast</h2>
+                <div class="icon">📅</div>
                 <table style="margin: auto;">
                     <tr>
                         <th></th>
@@ -78,8 +78,8 @@
             </div>
 
             <div class="card">
-                <div class="icon">🌡️</div>
                 <h2>{{ weather.location }} Pressure</h2>
+                <div class="icon">🧭</div>
                 <p>Pressure: {{ weather.pressure }} hPa</p>
                 <p>
                 Trend: 
@@ -93,7 +93,11 @@
                 </p>
             </div>
 
-            <div class="card"></div>
+            <div class="card">
+                <h2>Pressure Barometer</h2>
+                <canvas id="barometerGauge" width="200" height="100" data-pressure="{{ weather.pressure }}"></canvas>
+            </div>
+
 
         </div>
 
@@ -114,6 +118,11 @@
 
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel@2.0.0"></script>
+    <script src="{{ url_for('static', filename='barometer.js') }}"></script>
+
 
 </body>
 </html>
