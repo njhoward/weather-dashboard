@@ -8,10 +8,12 @@ body {
 
 .pages {
     display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
+    overflow-x: hidden;
+    /*scroll-snap-type: x mandatory;*/
     width: 100vw;
     height: 100vh;
+    touch-action: none; 
+    position: relative;
 }
 
 .page {
