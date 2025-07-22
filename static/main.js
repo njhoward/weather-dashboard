@@ -1,36 +1,58 @@
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".pages");
-    const totalPages = container.children.length;
+    const pages = Array.from(container.children);
+    const totalPages = pages.length;
+    const dotsContainer = document.getElementById("dots");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
     let currentPage = 0;
-    let startX = 0;
-    let startY = 0;
-    let tracking = false;
+    let startX = 0, tracking = false;
 
+    // Add dots
+    pages.forEach((_, i) => {
+        const dot = document.createElement("span");
+        if (i === 0) dot.classList.add("active");
+        dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll("span");
+
+    function goToPage(index) {
+        if (index < 0 || index >= totalPages) return;
+        currentPage = index;
+        container.scrollTo({
+            left: window.innerWidth * currentPage,
+            behavior: "smooth"
+        });
+        dots.forEach((d, i) => d.classList.toggle("active", i === currentPage));
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === totalPages - 1;
+    }
+
+    // Arrow clicks
+    prevBtn.addEventListener("click", () => goToPage(currentPage - 1));
+    nextBtn.addEventListener("click", () => goToPage(currentPage + 1));
+
+    // Two-finger swipe
     container.addEventListener("touchstart", (e) => {
         if (e.touches.length !== 2) return;
         startX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-        startY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
         tracking = true;
     });
 
     container.addEventListener("touchend", (e) => {
         if (!tracking) return;
         tracking = false;
-
         const endX = (e.changedTouches[0].clientX + e.changedTouches[1].clientX) / 2;
         const deltaX = endX - startX;
 
         if (Math.abs(deltaX) > 50) {
-            if (deltaX < 0 && currentPage < totalPages - 1) {
-                currentPage++;
-            } else if (deltaX > 0 && currentPage > 0) {
-                currentPage--;
-            }
-
-            container.scrollTo({
-                left: currentPage * window.innerWidth,
-                behavior: "smooth"
-            });
+            if (deltaX < 0) goToPage(currentPage + 1);
+            else goToPage(currentPage - 1);
         }
+    });
+
+    // Resize snap correction
+    window.addEventListener("resize", () => {
+        goToPage(currentPage);
     });
 });
