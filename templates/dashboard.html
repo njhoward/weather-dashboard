@@ -7,7 +7,14 @@
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
-    <h1>Home Weather Dashboard</h1>
+    <header class="top-bar">
+        <h1>Home Weather Dashboard</h1>
+        <div class="nav-controls">
+            <button class="nav-arrow" id="prev">&#8592;</button>
+            <div class="dots" id="dots"></div>
+            <button class="nav-arrow" id="next">&#8594;</button>
+        </div>
+    </header>
 
 
 
@@ -98,10 +105,5 @@
 
     </div>
 
-    <div class="nav-controls">
-        <button class="nav-arrow" id="prev">&#8592;</button>
-        <div class="dots" id="dots"></div>
-        <button class="nav-arrow" id="next">&#8594;</button>
-    </div>
 </body>
 </html>
