@@ -7,6 +7,7 @@ from flask import Flask, render_template
 
 from config import BOM_JSON_URL, OPEN_METEO_FORECAST_URL
 from moon import get_moon_phase
+from pressure import get_pressure_trend
 
 
 app = Flask(__name__)
@@ -43,6 +44,8 @@ def dashboard():
 
         if readings:
             latest = readings[0]
+            pressure_trend = get_pressure_trend(readings)
+
             weather = {
                 "location": latest.get("name", "N/A"),
                 "temp": latest.get("air_temp", "N/A"),
@@ -51,7 +54,8 @@ def dashboard():
                 "windkmh": latest.get("wind_spd_kmh", "N/A"),
                 "winddir": latest.get("wind_dir", "N/A"),
                 "gustkmh": latest.get("gust_kmh", "N/A"),
-                "pressure": latest.get("press", "N/A")
+                "pressure": latest.get("press", "N/A"),
+                "pressure_trend": pressure_trend
             }
         else:
             print("BoM JSON structure missing 'data'")
