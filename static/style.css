@@ -11,7 +11,7 @@ body {
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     width: 100vw;
-    height: calc(100vh - 60px);
+    height: 100vh;
 }
 
 .page {
@@ -23,7 +23,15 @@ body {
     padding: 1em;
     box-sizing: border-box;
     scroll-snap-align: start;
-    height: 100%;
+    height: calc(100vh - 60px);
+}
+
+@media (min-width: 1025px) {
+    .page {
+        max-width: 1200px;
+        margin: auto;
+        height: 100vh;
+    }
 }
 
 
