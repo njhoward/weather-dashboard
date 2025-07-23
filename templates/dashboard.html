@@ -33,7 +33,7 @@
                 <h2>{{ weather.location }} Wind</h2>
                 <div class="icon">💨</div>
                 <p>Wind Speed: {{ weather.windkmh }} km/h</p>
-                <p>Direction: {{ weather.winddir }}%</p>
+                <p>Direction: {{ weather.winddir }}</p>
                 <p>Gusts: {{ weather.gustkmh }} km/h</p>
             </div>
 
@@ -79,22 +79,6 @@
 
             <div class="card">
                 <h2>{{ weather.location }} Pressure</h2>
-                <div class="icon">🧭</div>
-                <p>Pressure: {{ weather.pressure }} hPa</p>
-                <p>
-                Trend: 
-                    {% if weather.pressure_trend == 'rising' %}
-                        <span style="color: lime;">⬆️</span>
-                    {% elif weather.pressure_trend == 'falling' %}
-                        <span style="color: red;">⬇️</span>
-                    {% else %}
-                        <span style="color: gray;">➡️</span>
-                    {% endif %}
-                </p>
-            </div>
-
-            <div class="card">
-                <h2>Pressure Barometer</h2>
                 <canvas id="barometerGauge"
                         width="200" height="200"
                         data-pressure="{{ weather.pressure }}"
