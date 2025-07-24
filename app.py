@@ -14,6 +14,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def dashboard():
+    #general info
+    general = {
+        "location": LOCATION,
+        "country": COUNTRY
+    }
+
+
     #forecast information
     forecast_data = {}
     try:
@@ -51,7 +58,6 @@ def dashboard():
             pressure_trend = get_pressure_trend(readings)
 
             weather = {
-                "location": LOCATION,
                 "station": latest.get("name", "N/A"),
                 "temp": latest.get("air_temp", "N/A"),
                 "humidity": latest.get("rel_hum", "N/A"),
@@ -76,7 +82,7 @@ def dashboard():
 
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
-    return render_template("dashboard.html", weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase)
+    return render_template("dashboard.html", general=general, weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase)
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():

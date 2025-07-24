@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="top-bar">
-        <h1>Home Weather Dashboard - {{ weather.location }}</h1>
+        <h1>Home Weather Dashboard - {{ general.location }}, {{ general.country }}</h1>
         <div class="nav-controls">
             <button class="nav-arrow" id="prev">&#8592;</button>
             <div class="dots" id="dots"></div>
@@ -114,6 +114,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel@2.0.0"></script>
     <script src="{{ url_for('static', filename='barometer.js') }}"></script>
 
-
+    <script src="{{ url_for('static', filename='refresh.js') }}"></script>
 </body>
 </html>
