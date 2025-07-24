@@ -3,9 +3,9 @@
 import requests
 import json
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 
-from config import BOM_JSON_URL, OPEN_METEO_FORECAST_URL
+from config import LOCATION, COUNTRY, BOM_JSON_URL, OPEN_METEO_FORECAST_URL, load_config, save_config
 from moon import get_moon_phase
 from pressure import get_pressure_trend
 
@@ -51,7 +51,8 @@ def dashboard():
             pressure_trend = get_pressure_trend(readings)
 
             weather = {
-                "location": latest.get("name", "N/A"),
+                "location": LOCATION,
+                "station": latest.get("name", "N/A"),
                 "temp": latest.get("air_temp", "N/A"),
                 "humidity": latest.get("rel_hum", "N/A"),
                 "summary": latest.get("weather", "N/A"),
@@ -76,6 +77,17 @@ def dashboard():
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
     return render_template("dashboard.html", weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase)
+
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    config = load_config()
+    if request.method == 'POST':
+        config['BOM_JSON_URL'] = request.form['BOM_JSON_URL']
+        config['OPEN_METEO_FORECAST_URL'] = request.form['OPEN_METEO_FORECAST_URL']
+        save_config(config)
+        return redirect(url_for('settings'))
+    return render_template('settings.html', config=config)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

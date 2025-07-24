@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="top-bar">
-        <h1>Home Weather Dashboard</h1>
+        <h1>Home Weather Dashboard - {{ weather.location }}</h1>
         <div class="nav-controls">
             <button class="nav-arrow" id="prev">&#8592;</button>
             <div class="dots" id="dots"></div>
@@ -22,7 +22,7 @@
         <div class="page">
 
             <div class="card">
-                <h2>{{ weather.location }} Weather</h2>
+                <h2>Current Weather</h2>
                 <div class="icon">🌤️</div>
                 <p>Temp: {{ weather.temp }}°C</p>
                 <p>Humidity: {{ weather.humidity }}%</p>
@@ -30,7 +30,7 @@
             </div>
 
             <div class="card">
-                <h2>{{ weather.location }} Wind</h2>
+                <h2>Wind</h2>
                 <div class="icon">💨</div>
                 <p>Wind Speed: {{ weather.windkmh }} km/h</p>
                 <p>Direction: {{ weather.winddir }}</p>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="card">
-                <h2>{{ weather.location }} Pressure</h2>
+                <h2>Atmospheric Pressure</h2>
                 <canvas id="barometerGauge"
                         width="200" height="200"
                         data-pressure="{{ weather.pressure }}"

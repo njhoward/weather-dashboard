@@ -8,6 +8,14 @@
     <h1>Settings</h1>
     <form method="post">
         <div class="card">
+
+
+            <label for="LOCATION">Location:</label><br>
+            <input type="text" name="LOCATION" value="{{ config.LOCATION }}" size="100"><br><br>
+
+            <label for="COUNTRY">Country:</label><br>
+            <input type="text" name="COUNTRY" value="{{ config.COUNTRY }}" size="100"><br><br>
+
             <label for="BOM_JSON_URL">BOM JSON URL:</label><br>
             <input type="text" name="BOM_JSON_URL" value="{{ config.BOM_JSON_URL }}" size="100"><br><br>
 
