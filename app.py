@@ -82,6 +82,8 @@ def dashboard():
 def settings():
     config = load_config()
     if request.method == 'POST':
+        config['LOCATION'] = request.form['LOCATION']
+        config['COUNTRY'] = request.form['COUNTRY']
         config['BOM_JSON_URL'] = request.form['BOM_JSON_URL']
         config['OPEN_METEO_FORECAST_URL'] = request.form['OPEN_METEO_FORECAST_URL']
         save_config(config)
