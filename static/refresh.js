@@ -30,3 +30,8 @@ function scheduleRefresh() {
 }
 
 window.addEventListener("load", scheduleRefresh);
+
+
+function manualRefresh() {
+    location.reload();
+}

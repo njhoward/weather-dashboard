@@ -88,6 +88,14 @@
 
             </div>
 
+            <div class="card">
+                <div class="icon">⏰</div>
+                <h2>Time</h2>
+                <p>Date: {{ general.date }}</p>
+                <p>Current Time: <span id="current-time">--:--:--</span></p>
+                <p>Last Updated: {{ general.last_updated }}</p>
+                <button onclick="manualRefresh()">🔄 Refresh</button>
+            </div>
 
 
         </div>
@@ -115,5 +123,6 @@
     <script src="{{ url_for('static', filename='barometer.js') }}"></script>
 
     <script src="{{ url_for('static', filename='refresh.js') }}"></script>
+    <script src="{{ url_for('static', filename='time.js') }}"></script>
 </body>
 </html>

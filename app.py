@@ -17,7 +17,9 @@ def dashboard():
     #general info
     general = {
         "location": LOCATION,
-        "country": COUNTRY
+        "country": COUNTRY,
+        "date": datetime.now().strftime("%A, %d %B %Y"),  # e.g. Thursday, 25 July 2025
+        "last_updated": datetime.now().strftime("%H:%M:%S")
     }
 
 
