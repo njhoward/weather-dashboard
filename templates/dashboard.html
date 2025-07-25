@@ -80,8 +80,10 @@
             <div class="card pressure-card">
                 <div class="card-inner">
                     <div class="card-front">
-                        <div class="ellipsis" onclick="flipCard(this)">⋯</div>
-                        <h2>Atmospheric Pressure</h2>
+                        <div class="card-header">
+                            <h2>Atmospheric Pressure</h2>
+                            <div class="ellipsis" onclick="flipCard(this)">⋯</div>
+                        </div>
                         <div class="gauge">
                             <canvas id="barometerGauge"
                                     width="200" height="200"
@@ -91,6 +93,7 @@
                             </canvas>
                         </div>
                     </div>
+
                     <div class="card-back">
                         <h2>24h Pressure History</h2>
                         <table class="pressure-history">
