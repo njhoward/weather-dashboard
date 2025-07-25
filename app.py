@@ -63,6 +63,7 @@ def dashboard():
                 "station": latest.get("name", "N/A"),
                 "temp": latest.get("air_temp", "N/A"),
                 "humidity": latest.get("rel_hum", "N/A"),
+                "apparent_t": latest.get("apparent_t", "N/A"),
                 "summary": latest.get("weather", "N/A"),
                 "windkmh": latest.get("wind_spd_kmh", "N/A"),
                 "winddir": latest.get("wind_dir", "N/A"),
@@ -72,6 +73,33 @@ def dashboard():
                 "pressure_2h_ago": pressure_5ago,
                 "pressure_trend": pressure_trend
             }
+
+            last_24h_readings = [r for r in readings if r.get("press") is not None][:48]
+            pressure_history = []
+            for i, r in enumerate(last_24h_readings):
+                current_pressure = float(r["press"])
+                dt = datetime.strptime(r["local_date_time_full"], "%Y%m%d%H%M%S")
+                timestamp = dt.strftime("%d-%b %H:%M")
+
+                # Compare with previous reading to determine trend
+                if i < len(last_24h_readings) - 1:
+                    prev_pressure = float(last_24h_readings[i + 1]["press"])
+                    if current_pressure > prev_pressure:
+                        trend_icon = "⬆️"
+                    elif current_pressure < prev_pressure:
+                        trend_icon = "⬇️"
+                    else:
+                        trend_icon = "➡️"
+                else:
+                    trend_icon = "–"
+
+                pressure_history.append({
+                    "time": timestamp,
+                    "value": f"{current_pressure:.1f}",
+                    "trend_icon": trend_icon
+                })
+
+
         else:
             print("BoM JSON structure missing 'data'")
             weather = {"temp": "N/A", "humidity": "N/A", "summary": "Unavailable"}
@@ -84,7 +112,7 @@ def dashboard():
 
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
-    return render_template("dashboard.html", general=general, weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase)
+    return render_template("dashboard.html", general=general, weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase, pressure_history=pressure_history)
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():

@@ -56,3 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
         goToPage(currentPage);
     });
 });
+
+
+function flipCard(element) {
+    const card = element.closest(".pressure-card");
+    card.classList.toggle("flipped");
+}

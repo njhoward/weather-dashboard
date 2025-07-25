@@ -26,7 +26,7 @@
                 <div class="icon">🌤️</div>
                 <p>Temp: {{ weather.temp }}°C</p>
                 <p>Humidity: {{ weather.humidity }}%</p>
-                <p>Conditions: {{ weather.summary }}</p>
+                <p>Feels Like: {{ weather.apparent_t }}°C</p>
             </div>
 
             <div class="card">
@@ -77,24 +77,55 @@
                 </table>
             </div>
 
-            <div class="card">
-                <h2>Atmospheric Pressure</h2>
-                <canvas id="barometerGauge"
-                        width="200" height="200"
-                        data-pressure="{{ weather.pressure }}"
-                        data-trend="{{ weather.pressure_trend }}"
-                        data-previous="{{ weather.pressure_2h_ago }}">
-                </canvas>
-
+            <div class="card pressure-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="ellipsis" onclick="flipCard(this)">⋯</div>
+                        <h2>Atmospheric Pressure</h2>
+                        <div class="gauge">
+                            <canvas id="barometerGauge"
+                                    width="200" height="200"
+                                    data-pressure="{{ weather.pressure }}"
+                                    data-trend="{{ weather.pressure_trend }}"
+                                    data-previous="{{ weather.pressure_2h_ago }}">
+                            </canvas>
+                            <div class="pressure-reading">{{ pressure.current }} hPa</div>
+                            <div class="trend">{{ pressure.trend_icon }} {{ pressure.trend_label }}</div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h2>24h Pressure History</h2>
+                        <table class="pressure-history">
+                            <thead>
+                                <tr>
+                                    <th>Date/Time</th>
+                                    <th>Pressure (hPa)</th>
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for r in pressure_history %}
+                                <tr>
+                                    <td>{{ r.time }}</td>
+                                    <td>{{ r.value }}</td>
+                                    <td>{{ r.trend_icon }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <button class="flip-back" onclick="flipCard(this)">🔙</button>
+                    </div>
+                </div>
             </div>
+
 
             <div class="card">
                 <div class="card-top-right">
                     <span class="card-action" onclick="manualRefresh()">🔄</span>
                 </div>
-                <div class="icon">⏰</div>
                 <h2>Time</h2>
-                <p>Date: {{ general.date }}</p>
+                <div class="icon">⏰</div>
+                 <p>Date: {{ general.date }}</p>
                 <p>Current Time: <span id="current-time">--:--:--</span></p>
                 <p>Last Updated: {{ general.last_updated }}</p>
             </div>
