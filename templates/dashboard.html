@@ -79,45 +79,42 @@
 
             <div class="card pressure-card">
                 <div class="card-inner">
+                    <!-- FRONT -->
                     <div class="card-front">
-                        <div class="card-header">
-                            <h2>Atmospheric Pressure</h2>
-                            <div class="ellipsis" onclick="flipCard(this)">⋯</div>
-                        </div>
-                        <div class="gauge">
-                            <canvas id="barometerGauge"
-                                    width="200" height="200"
-                                    data-pressure="{{ weather.pressure }}"
-                                    data-trend="{{ weather.pressure_trend }}"
-                                    data-previous="{{ weather.pressure_2h_ago }}">
-                            </canvas>
-                        </div>
+                    <div class="card-header">
+                        <h2>Atmospheric Pressure</h2>
+                        <button class="ellipsis" onclick="flipCard(this)" aria-label="Show pressure history">⋯</button>
+                    </div>
+                    <canvas id="barometerGauge"
+                            width="200" height="200"
+                            data-pressure="{{ weather.pressure }}"
+                            data-trend="{{ weather.pressure_trend }}"
+                            data-previous="{{ weather.pressure_2h_ago }}">
+                    </canvas>
                     </div>
 
+                    <!-- BACK -->
                     <div class="card-back">
-                        <h2>24h Pressure History</h2>
-                        <table class="pressure-history">
-                            <thead>
-                                <tr>
-                                    <th>Date/Time</th>
-                                    <th>Pressure (hPa)</th>
-                                    <th>Trend</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for r in pressure_history %}
-                                <tr>
-                                    <td>{{ r.time }}</td>
-                                    <td>{{ r.value }}</td>
-                                    <td>{{ r.trend_icon }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <button class="flip-back" onclick="flipCard(this)">🔙</button>
+                    <h2>24h Pressure History</h2>
+                    <table class="pressure-history">
+                        <thead>
+                        <tr><th>Date/Time</th><th>Pressure (hPa)</th><th>Trend</th></tr>
+                        </thead>
+                        <tbody>
+                        {% for r in pressure_history %}
+                        <tr>
+                            <td>{{ r.time }}</td>
+                            <td>{{ r.value }}</td>
+                            <td>{{ r.trend_icon }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button class="flip-back" onclick="flipCard(this)">🔙</button>
                     </div>
                 </div>
             </div>
+
 
 
             <div class="card">

@@ -9,7 +9,6 @@ body {
 .pages {
     display: flex;
     overflow-x: auto;
-    /*scroll-snap-type: x mandatory;*/
     scroll-behavior: smooth;
     width: 100vw;
     height: 100vh;
@@ -17,7 +16,6 @@ body {
     position: relative;
     scrollbar-width: none;
 }
-
 .pages::-webkit-scrollbar {
     display: none;
 }
@@ -54,6 +52,7 @@ body {
     font-size: 1.8em;
     color: #00d2ff;
 }
+
 .card p {
     margin: 0;
     font-size: 0.9em;
@@ -81,7 +80,6 @@ body {
     cursor: pointer;
     color: #aaa;
 }
-
 .card-action:hover {
     color: #fff;
 }
@@ -96,7 +94,6 @@ body {
     margin-bottom: 0.3em;
 }
 
-
 .top-bar {
     width: 100%;
     display: flex;
@@ -105,7 +102,6 @@ body {
     padding: 0.5em 1em;
     box-sizing: border-box;
 }
-
 .top-bar h1 {
     font-size: 1.5em;
     margin: 0;
@@ -122,7 +118,6 @@ body {
     display: flex;
     gap: 0.4em;
 }
-
 .dots span {
     width: 10px;
     height: 10px;
@@ -131,7 +126,6 @@ body {
     display: inline-block;
     transition: background 0.3s;
 }
-
 .dots span.active {
     background: #00d2ff;
 }
@@ -146,7 +140,6 @@ body {
     cursor: pointer;
     user-select: none;
 }
-
 .nav-arrow:disabled {
     opacity: 0.3;
     cursor: default;
@@ -157,56 +150,70 @@ canvas {
     margin: auto;
 }
 
+/* ========== PRESSURE CARD FLIP ========== */
 .pressure-card {
-    height: 100%;
     perspective: 1000px;
     position: relative;
+    height: 100%;
 }
 
 .card-inner {
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
     position: relative;
-}
-
-.card-front, .card-back {
-    backface-visibility: hidden;
-    position: absolute;
     width: 100%;
     height: 100%;
-    padding: 1em;
-    box-sizing: border-box;
-    border-radius: 15px;
-}
-
-.card-front {
-    background: #1e1e1e;
-    z-index: 2;
-}
-
-.card-back {
-    background: #1e1e1e;
-    transform: rotateY(180deg);
-    overflow-y: auto;
-    min-height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
 }
 
 .pressure-card.flipped .card-inner {
     transform: rotateY(180deg);
 }
 
-.ellipsis {
+.card-front, .card-back {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 1.5em;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: #1e1e1e;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    overflow-y: auto;
+}
+
+.card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+.card-header h2 {
+    font-size: 1.8em;
+    color: #00d2ff;
+    margin: 0;
+}
+
+.ellipsis {
     background: none;
     border: none;
     color: #0ff;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
 }
 
+/* ========== Pressure History Table ========== */
 .pressure-history {
     width: 100%;
     color: #eee;
@@ -217,6 +224,7 @@ canvas {
     padding: 0.25em 0.5em;
 }
 
+/* ========== Flip Back Button ========== */
 .flip-back {
     margin-top: 0.5em;
     padding: 0.25em 0.5em;
