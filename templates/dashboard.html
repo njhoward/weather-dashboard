@@ -3,8 +3,8 @@
 <head>
     <title>Home Weather Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static/css', filename='style.css') }}">
-    <script src="{{ url_for('static/js', filename='main.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static, filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 <body>
     <header class="top-bar">
@@ -72,8 +72,8 @@
             <div class="card">
                 <h2>Wind</h2>
                 <div class="wind-compass-container">
-                    <img class="compass-face" src="{{ url_for('static/img', filename='compass.png') }}" alt="Compass Face">
-                    <img class="compass-needle" id="wind-needle" src="{{ url_for('static/img', filename='needle.png') }}"
+                    <img class="compass-face" src="{{ url_for('static', filename='img/compass.png') }}" alt="Compass Face">
+                    <img class="compass-needle" id="wind-needle" src="{{ url_for('static', filename='img/needle.png') }}"
                         alt="Needle" data-winddir="{{ weather.winddir }}">
                 </div>
                 <p>Wind Speed: {{ weather.windkmh }} km/h</p>
@@ -159,10 +159,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel@2.0.0"></script>
-    <script src="{{ url_for('static/js', filename='barometer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/barometer.js') }}"></script>
 
-    <script src="{{ url_for('static/js', filename='refresh.js') }}"></script>
-    <script src="{{ url_for('static'/js, filename='clock.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/refresh.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
     <script>    
         drawClock();
     </script>
