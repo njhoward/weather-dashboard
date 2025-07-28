@@ -63,22 +63,6 @@ function flipCard(element) {
     card.classList.toggle("flipped");
 }
 
-function rotateCompass(degrees) {
-    const compass = document.getElementById('wind-compass');
-    if (compass) {
-        compass.style.transform = `rotate(${degrees}deg)`;
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const compass = document.getElementById("wind-compass");
-    if (compass) {
-        const dirText = compass.dataset.winddir;
-        const degrees = convertCompassToDegrees(dirText);
-        rotateCompass(degrees);
-    }
-});
-
 function convertCompassToDegrees(dir) {
     const directions = [
         "N", "NNE", "NE", "ENE",
@@ -87,6 +71,21 @@ function convertCompassToDegrees(dir) {
         "W", "WNW", "NW", "NNW"
     ];
     const index = directions.indexOf(dir.toUpperCase());
-    return index >= 0 ? (index * 22.5) : 0;
+    return index >= 0 ? index * 22.5 : 0;
 }
 
+function rotateNeedle(degrees) {
+    const needle = document.getElementById('wind-needle');
+    if (needle) {
+        needle.style.transform = `rotate(${degrees}deg)`;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const needle = document.getElementById("wind-needle");
+    if (needle) {
+        const dirText = needle.dataset.winddir;
+        const degrees = convertCompassToDegrees(dirText);
+        rotateNeedle(degrees);
+    }
+});

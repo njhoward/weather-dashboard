@@ -72,9 +72,9 @@
             <div class="card">
                 <h2>Wind</h2>
                 <div class="wind-compass-container">
-                    <img id="wind-compass" src="{{ url_for('static', filename='compass.png') }}" alt="Wind Direction Compass" data-winddir="{{ weather.winddir }}">
-
-                    <div class="wind-speed">{{ weather.windkmh }} km/h</div>
+                    <img class="compass-face" src="{{ url_for('static', filename='compass.png') }}" alt="Compass Face">
+                    <img class="compass-needle" id="wind-needle" src="{{ url_for('static', filename='needle.png') }}"
+                        alt="Needle" data-winddir="{{ weather.winddir }}">
                 </div>
                 <p>Gusts: {{ weather.gustkmh }} km/h</p>
             </div>
