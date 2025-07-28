@@ -123,6 +123,7 @@
                 </div>
                 <h2>Time</h2>
                 <div class="icon">⏰</div>
+                <canvas id="analogClock" width="120" height="120"></canvas>
                  <p>Date: {{ general.date }}</p>
                 <p>Current Time: <span id="current-time">--:--:--</span></p>
                 <p>Last Updated: {{ general.last_updated }}</p>
@@ -154,5 +155,10 @@
 
     <script src="{{ url_for('static', filename='refresh.js') }}"></script>
     <script src="{{ url_for('static', filename='time.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='clock.js') }}"></script>
+    <script>
+        drawClock();
+    </script>
 </body>
 </html>
