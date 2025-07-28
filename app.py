@@ -68,7 +68,6 @@ def dashboard():
                 "windkmh": latest.get("wind_spd_kmh", "N/A"),
                 "winddir": latest.get("wind_dir", "N/A"),
                 "gustkmh": latest.get("gust_kmh", "N/A"),
-                # "pressure": latest.get("press", "N/A"),
                 "pressure": pressure_now,
                 "pressure_2h_ago": pressure_5ago,
                 "pressure_trend": pressure_trend

@@ -30,20 +30,6 @@
             </div>
 
             <div class="card">
-                <h2>Wind</h2>
-                <div class="icon">💨</div>
-                <p>Wind Speed: {{ weather.windkmh }} km/h</p>
-                <p>Direction: {{ weather.winddir }}</p>
-                <p>Gusts: {{ weather.gustkmh }} km/h</p>
-            </div>
-
-            <div class="card">
-                <h2>Moon Phase</h2>
-                <div class="bigicon">{{ moon.icon }}</div>
-                <p>{{ moon.description }}</p>
-            </div>
-
-            <div class="card">
                 <h2>Forecast</h2>
                 <div class="icon">📅</div>
                 <table style="margin: auto;">
@@ -75,6 +61,22 @@
                         {% endfor %}
                     </tr>
                 </table>
+            </div>
+
+            <div class="card">
+                <h2>Moon Phase</h2>
+                <div class="bigicon">{{ moon.icon }}</div>
+                <p>{{ moon.description }}</p>
+            </div>
+
+            <div class="card">
+                <h2>Wind</h2>
+                <div class="wind-compass-container">
+                    <img id="wind-compass" src="{{ url_for('static', filename='compass.png') }}" alt="Wind Direction Compass" data-winddir="{{ weather.winddir }}">
+
+                    <div class="wind-speed">{{ weather.windkmh }} km/h</div>
+                </div>
+                <p>Gusts: {{ weather.gustkmh }} km/h</p>
             </div>
 
             <div class="card pressure-card">
@@ -141,7 +143,13 @@
             <div class="card">🌧️<p>Rainfall</p><h2>rain mm</h2></div>
             <div class="card">🌫️<p>Feels Like</p><h2>feels like °C</h2></div>
             <div class="card">🔻<p>Pressure</p><h2>pressue hPa</h2></div>
-            <div class="card">📶<p>Signal</p><h2>signal</h2></div>
+            <div class="card">
+                <h2>Wind</h2>
+                <div class="icon">💨</div>
+                <p>Wind Speed: {{ weather.windkmh }} km/h</p>
+                <p>Direction: {{ weather.winddir }}</p>
+                <p>Gusts: {{ weather.gustkmh }} km/h</p>
+            </div>
             <div class="card">📅<p>Forecast</p><h2>forecast</h2></div>
         </div>
 
@@ -153,8 +161,6 @@
     <script src="{{ url_for('static', filename='barometer.js') }}"></script>
 
     <script src="{{ url_for('static', filename='refresh.js') }}"></script>
-    <script src="{{ url_for('static', filename='time.js') }}"></script>
-
     <script src="{{ url_for('static', filename='clock.js') }}"></script>
     <script>
         drawClock();

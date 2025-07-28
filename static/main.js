@@ -62,3 +62,31 @@ function flipCard(element) {
     const card = element.closest(".pressure-card");
     card.classList.toggle("flipped");
 }
+
+function rotateCompass(degrees) {
+    const compass = document.getElementById('wind-compass');
+    if (compass) {
+        compass.style.transform = `rotate(${degrees}deg)`;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const compass = document.getElementById("wind-compass");
+    if (compass) {
+        const dirText = compass.dataset.winddir;
+        const degrees = convertCompassToDegrees(dirText);
+        rotateCompass(degrees);
+    }
+});
+
+function convertCompassToDegrees(dir) {
+    const directions = [
+        "N", "NNE", "NE", "ENE",
+        "E", "ESE", "SE", "SSE",
+        "S", "SSW", "SW", "WSW",
+        "W", "WNW", "NW", "NNW"
+    ];
+    const index = directions.indexOf(dir.toUpperCase());
+    return index >= 0 ? (index * 22.5) : 0;
+}
+
