@@ -236,7 +236,7 @@ canvas {
 }
 
 #analogClock {
-    margin: 0 auto 0.5em auto;
+    margin: 0 auto 1em auto;
     display: block;
     background: #fff;
     border: 2px solid #ccc;
