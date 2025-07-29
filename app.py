@@ -112,7 +112,7 @@ def dashboard():
         print("BoM fetch error:", e)
         weather = {"temp": "N/A", "humidity": "N/A", "summary": "Unavailable"}
 
-    moon_phase = get_moon_phase()
+    moon_phase = get_moon_phase(lat=LAT, long=LONG)
 
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
