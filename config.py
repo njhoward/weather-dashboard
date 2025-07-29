@@ -49,15 +49,15 @@ def save_config(config):
 
 config = load_config()
 
-LOCATION = config["LOCATION"]
-COUNTRY = config["COUNTRY"]
-LAT = config["LAT"]
-LONG = config["LONG"]
-BOM_JSON_URL = config["BOM_JSON_URL"]
+LOCATION = config.get("LOCATION", DEFAULT_CONFIG["LOCATION"])
+COUNTRY = config.get("COUNTRY", DEFAULT_CONFIG["COUNTRY"])
+LAT = config.get("LAT", DEFAULT_LAT)
+LONG = config.get("LONG", DEFAULT_LONG)
+BOM_JSON_URL = config.get("BOM_JSON_URL", DEFAULT_CONFIG["BOM_JSON_URL"])
 
-raw_url = config["OPEN_METEO_FORECAST_URL"]
+raw_url = config.get("OPEN_METEO_FORECAST_URL", DEFAULT_CONFIG["OPEN_METEO_FORECAST_URL"])
 try:
     OPEN_METEO_FORECAST_URL = raw_url.format(lat=LAT, long=LONG)
-except:
+except Exception:
     OPEN_METEO_FORECAST_URL = raw_url
 
