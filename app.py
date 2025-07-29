@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 
-from config import LOCATION, COUNTRY, BOM_JSON_URL, OPEN_METEO_FORECAST_URL, load_config, save_config
+from config import LOCATION, COUNTRY, LAT, LONG, BOM_JSON_URL, OPEN_METEO_FORECAST_URL, load_config, save_config
 from moon import get_moon_phase
 from pressure import get_pressure_trend
 
