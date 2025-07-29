@@ -18,8 +18,13 @@ def dashboard():
     general = {
         "location": LOCATION,
         "country": COUNTRY,
+        "lat": LAT,
+        "long": LONG,
+        "bom_url": BOM_JSON_URL,
+        "forecast_url": OPEN_METEO_FORECAST_URL,
         "date": datetime.now().strftime("%A, %d %B %Y"),  # e.g. Thursday, 25 July 2025
-        "last_updated": datetime.now().strftime("%H:%M:%S")
+        "last_updated": datetime.now().strftime("%H:%M:%S"),
+        
     }
 
 
