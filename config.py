@@ -69,6 +69,6 @@ BOM_JSON_URL = config["BOM_JSON_URL"]
 raw_url = config["OPEN_METEO_FORECAST_URL"]
 try:
     OPEN_METEO_FORECAST_URL = raw_url.format(lat=LAT, long=LONG)
-except
+except:
     OPEN_METEO_FORECAST_URL = raw_url
 
