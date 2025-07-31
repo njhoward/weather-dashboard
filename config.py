@@ -15,6 +15,7 @@ DEFAULT_CONFIG = {
     "LAT": DEFAULT_LAT,
     "LONG": DEFAULT_LONG,
     "BOM_JSON_URL": "http://www.bom.gov.au/fwo/IDN60901/IDN60901.94768.json",
+    "BOM_FORECAST_URL": "http://www.bom.gov.au/places/nsw/sydney",
     "OPEN_METEO_FORECAST_URL": (
         "https://api.open-meteo.com/v1/forecast?"
         "latitude={lat}&longitude={long}&daily=temperature_2m_min,temperature_2m_max,"
@@ -54,6 +55,7 @@ COUNTRY = config.get("COUNTRY", DEFAULT_CONFIG["COUNTRY"])
 LAT = config.get("LAT", DEFAULT_LAT)
 LONG = config.get("LONG", DEFAULT_LONG)
 BOM_JSON_URL = config.get("BOM_JSON_URL", DEFAULT_CONFIG["BOM_JSON_URL"])
+BOM_FORECAST_URL = config.get("BOM_FORECAST_URL", DEFAULT_CONFIG["BOM_FORECAST_URL"])
 
 raw_url = config.get("OPEN_METEO_FORECAST_URL", DEFAULT_CONFIG["OPEN_METEO_FORECAST_URL"])
 try:
