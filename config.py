@@ -6,9 +6,6 @@ import os
 DEFAULT_LAT = -33.86
 DEFAULT_LONG = 151.2
 
-DEFAULT_LAT = -33.86
-DEFAULT_LONG = 151.2
-
 DEFAULT_CONFIG = {
     "LOCATION": "Sydney",
     "COUNTRY": "Australia",
