@@ -5,10 +5,6 @@ def get_bom_forecast(bomurl):
     forecasts = []
     headers = {"User-Agent": "Mozilla/5.0"}
 
-
-    forecasts = []
-    headers = {"User-Agent": "Mozilla/5.0"}
-
     try:
         response = requests.get(bomurl, headers=headers, timeout=5)
         response.raise_for_status()
@@ -17,7 +13,7 @@ def get_bom_forecast(bomurl):
         print(f"HTTP request failed: {e}. Falling back to local file.")
         html = load_fallback_html()
         if html is None:
-            return forecasts  # empty
+            return {"issued": None, "daily": forecasts}
 
     try:
         soup = BeautifulSoup(html, "html.parser")
@@ -25,8 +21,14 @@ def get_bom_forecast(bomurl):
         print(f"HTML parsing failed: {e}. Falling back to local file.")
         html = load_fallback_html()
         if html is None:
-            return forecasts  # empty
+            return {"issued": None, "daily": forecasts}  # empty
         soup = BeautifulSoup(html, "html.parser")
+
+    issued_span = soup.select_one(".forecasts-top h2 span")
+    if issued_span:
+        issued_at = issued_span.text.strip()
+    else:
+        issued_at = "Changed Structure"
 
 
     forecast_blocks = soup.select("dl.forecast-summary")
@@ -37,7 +39,7 @@ def get_bom_forecast(bomurl):
             soup = BeautifulSoup(html, "html.parser")
             forecast_blocks = soup.select("dl.forecast-summary")
         if not forecast_blocks:
-            return forecasts  # empty
+            return {"issued": issued_at, "daily": forecasts}
 
     for block in forecast_blocks:
         date = block.select_one("dt.date a")
@@ -54,7 +56,7 @@ def get_bom_forecast(bomurl):
                 "icon_desc": icon["alt"] if icon else ""
             })
 
-    return forecasts;
+    return {"issued": issued_at, "daily": forecasts}
 
 
 

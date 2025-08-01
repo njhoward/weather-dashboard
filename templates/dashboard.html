@@ -157,6 +157,8 @@
         </div>
 
         <div class="page">
+
+
             <div class="card">
                 <h2>Debugging</h2>
                 <div class="icon">🐞</div>
@@ -167,6 +169,24 @@
                 <p>BOM URL: {{ general.bom_url }}</p>
                 <p>Forecast URL: {{ general.forecast_url }}</p>
             </div>
+
+            <div class="card">
+                <h2>Forecast</h2>
+                <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
+                <table>
+                    <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th></tr>
+                    {% for f in bom_forecasts[:5] %}
+                    <tr>
+                        <td>{{ f.date }}</td>
+                        <td>{{ f.min }}</td>
+                        <td>{{ f.max }}</td>
+                        <td>{{ f.chance_of_rain }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+
         </div>
 
 

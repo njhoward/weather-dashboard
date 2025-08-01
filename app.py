@@ -5,9 +5,10 @@ import json
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 
-from config import LOCATION, COUNTRY, LAT, LONG, BOM_JSON_URL, OPEN_METEO_FORECAST_URL, load_config, save_config
+from config import LOCATION, COUNTRY, LAT, LONG, BOM_JSON_URL, BOM_FORECAST_URL, OPEN_METEO_FORECAST_URL, load_config, save_config
 from moon import get_moon_phase
 from pressure import get_pressure_trend
+from bomforecast import get_bom_forecast
 
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ def dashboard():
     }
 
 
-    #forecast information
+    #mateo forecast information
     forecast_data = {}
     try:
         response = requests.get(OPEN_METEO_FORECAST_URL, timeout=5)
@@ -42,6 +43,10 @@ def dashboard():
             }
     except Exception as e:
         print(f"Error fetching Open-Meteo forecast: {e}")
+
+    bom_forecast_data = get_bom_forecast(BOM_FORECAST_URL)
+    bom_issued = bom_forecast_data["issued"]
+    bom_forecasts = bom_forecast_data["daily"]
     
     # current observations
     try:
@@ -116,7 +121,7 @@ def dashboard():
 
     indoor = {"temp": "N/A", "humidity": "N/A", "aqi": "N/A"}  # Placeholder for now
 
-    return render_template("dashboard.html", general=general, weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase, pressure_history=pressure_history)
+    return render_template("dashboard.html", general=general, weather=weather, indoor=indoor, forecast=forecast_data, moon=moon_phase, pressure_history=pressure_history, bom_issued=bom_issued, bom_forecasts=bom_forecasts)
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
