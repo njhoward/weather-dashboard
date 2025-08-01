@@ -174,12 +174,13 @@
                 <h2>Forecast</h2>
                 <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
                 <table>
-                    <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th></tr>
+                    <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th><th>Chance</th></tr>
                     {% for f in bom_forecasts[:5] %}
                     <tr>
                         <td>{{ f.date }}</td>
                         <td>{{ f.min }}</td>
                         <td>{{ f.max }}</td>
+                        <td>{{ f.rain_amt }}</td>
                         <td>{{ f.chance_of_rain }}</td>
                     </tr>
                     {% endfor %}

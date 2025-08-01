@@ -45,6 +45,7 @@ def get_bom_forecast(bomurl):
         date = block.select_one("dt.date a")
         min_temp = block.select_one("dd.min")
         max_temp = block.select_one("dd.max")
+        rain_amt = block.select_one("dd.amt")
         rain_chance = block.select_one("dd.pop")
         icon = block.select_one("dd.image img")
 
@@ -52,6 +53,7 @@ def get_bom_forecast(bomurl):
                 "date": date.text.strip() if date else "N/A",
                 "min": min_temp.text.strip() if min_temp else "N/A",
                 "max": max_temp.text.strip() if max_temp else "N/A",
+                "rain_amt": rain_amt.text.strip() if rain_amt else "",
                 "chance_of_rain": rain_chance.text.strip() if rain_chance else "",
                 "icon_desc": icon["alt"] if icon else ""
             })
