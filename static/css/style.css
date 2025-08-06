@@ -263,7 +263,7 @@ canvas {
 
 .wind-speed {
     position: absolute;
-    bottom: -1.8em;
+    bottom: -1em;
     width: 100%;
     text-align: center;
     font-size: 1em;
