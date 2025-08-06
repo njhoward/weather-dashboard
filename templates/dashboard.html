@@ -21,6 +21,7 @@
     <div class="pages">
         <div class="page">
 
+            <!-- Card 1 -->
             <div class="card">
                 <h2>Current Weather</h2>
                 <div class="icon">🌤️</div>
@@ -29,48 +30,7 @@
                 <p>Feels Like: {{ weather.apparent_t }}°C</p>
             </div>
 
-            <div class="card">
-                <h2>Forecast</h2>
-                <div class="icon">📅</div>
-                <table style="margin: auto;">
-                    <tr>
-                        <th></th>
-                        {% for i in range(5) %}
-                            <th>{{ forecast.dates[i+1] }}</th>
-                        {% endfor %}
-                    </tr>
-
-                    <tr>
-                        <td>Min</td>
-                        {% for i in range(5) %}
-                            <td>{{ forecast.min_temps[i+1] }}°</td>
-                        {% endfor %}
-                    </tr>
-
-                    <tr>
-                        <td>Max</td>
-                        {% for i in range(5) %}
-                            <td>{{ forecast.max_temps[i+1] }}°</td>
-                        {% endfor %}
-                    </tr>
-
-                    <tr>
-                        <td>Rain</td>
-                        {% for i in range(5) %}
-                            <td>{{ forecast.rainfall[i+1] }}mm</td>
-                        {% endfor %}
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card">
-                <h2>Moon Phase</h2>
-                <div class="bigicon">{{ moon.icon }}</div>
-                <p>{{ moon.description }}</p>
-                <p>Next Phase: {{ moon.next_phase_icon }} {{ moon.next_phase }} ({{ moon.next_phase_date }})</p>
-                <p>Next Full Moon: {{ moon.next_full_moon }}</p>
-            </div>
-
+            <!-- Card 2 -->
             <div class="card">
                 <h2>Wind</h2>
                 <div class="wind-compass-container">
@@ -82,6 +42,35 @@
                 <p>Gusts: {{ weather.gustkmh }} km/h</p>
             </div>
 
+            <!-- Card 3 -->
+            <div class="card">
+                <h2>Moon Phase</h2>
+                <div class="bigicon">{{ moon.icon }}</div>
+                <p>{{ moon.description }}</p>
+                <p>Next Phase: {{ moon.next_phase_icon }} {{ moon.next_phase }} ({{ moon.next_phase_date }})</p>
+                <p>Next Full Moon: {{ moon.next_full_moon }}</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <h2>Forecast</h2>
+                <div class="icon">📅</div>
+                <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
+                <table>
+                    <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th><th>Chance</th></tr>
+                    {% for f in bom_forecasts[1:7] %}
+                    <tr>
+                        <td>{{ f.date }}</td>
+                        <td>{{ f.min }}</td>
+                        <td>{{ f.max }}</td>
+                        <td>{{ f.rain_amt }}</td>
+                        <td>{{ f.chance_of_rain }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>       
+
+            <!-- Card 5 -->
             <div class="card pressure-card">
                 <div class="card-inner">
                     <!-- FRONT -->
@@ -121,7 +110,7 @@
             </div>
 
 
-
+            <!-- Card 6 -->
             <div class="card">
                 <div class="card-top-right">
                     <span class="card-action" onclick="manualRefresh()">🔄</span>
@@ -159,6 +148,8 @@
         <div class="page">
 
 
+            <!-- CARD 1-->
+
             <div class="card">
                 <h2>Debugging</h2>
                 <div class="icon">🐞</div>
@@ -170,8 +161,10 @@
                 <p>Forecast URL: {{ general.forecast_url }}</p>
             </div>
 
+            <!-- CARD 2-->
             <div class="card">
                 <h2>Forecast</h2>
+                <div class="icon">📅</div>
                 <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
                 <table>
                     <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th><th>Chance</th></tr>
@@ -184,6 +177,41 @@
                         <td>{{ f.chance_of_rain }}</td>
                     </tr>
                     {% endfor %}
+                </table>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <h2>Forecast</h2>
+                <div class="icon">📅</div>
+                <table style="margin: auto;">
+                    <tr>
+                        <th></th>
+                        {% for i in range(5) %}
+                            <th>{{ forecast.dates[i+1] }}</th>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Min</td>
+                        {% for i in range(5) %}
+                            <td>{{ forecast.min_temps[i+1] }}°</td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Max</td>
+                        {% for i in range(5) %}
+                            <td>{{ forecast.max_temps[i+1] }}°</td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Rain</td>
+                        {% for i in range(5) %}
+                            <td>{{ forecast.rainfall[i+1] }}mm</td>
+                        {% endfor %}
+                    </tr>
                 </table>
             </div>
 
