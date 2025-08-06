@@ -245,11 +245,11 @@ canvas {
 }
 
 .wind-compass-container {
-    position: relative;
-    width: 240px;
-    height: 240px;
-    margin: 0 auto 0.5em auto;
+    width: 180px;
+    height: 180px;
+    margin: 0.2em auto 0.2em auto;
 }
+
 
 .wind-compass-container img {
     position: absolute;
@@ -295,9 +295,4 @@ canvas {
     font-size: 0.8em;
     line-height: 1.2em;
     margin: 0.2em 0;
-}
-
-.wind-compass-container {
-    width: 200px;
-    height: 200px;
 }
