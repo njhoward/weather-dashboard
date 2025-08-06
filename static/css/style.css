@@ -279,3 +279,25 @@ canvas {
     transform-origin: 50% 50%;
     transition: transform 0.5s ease-in-out;
 }
+
+.compact-card {
+    justify-content: flex-start;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.compact-card .icon,
+.compact-card .bigicon {
+    margin-bottom: 0.2em;
+}
+
+.compact-card p {
+    font-size: 0.8em;
+    line-height: 1.2em;
+    margin: 0.2em 0;
+}
+
+.wind-compass-container {
+    width: 200px;
+    height: 200px;
+}

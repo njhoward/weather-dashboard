@@ -22,7 +22,7 @@
         <div class="page">
 
             <!-- Card 1 -->
-            <div class="card">
+            <div class="card compact-card">
                 <h2>Current Weather</h2>
                 <div class="icon">🌤️</div>
                 <p>Temp: {{ weather.temp }}°C</p>
@@ -31,7 +31,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="card">
+            <div class="card compact-card">
                 <h2>Wind</h2>
                 <div class="wind-compass-container">
                     <img class="compass-face" src="{{ url_for('static', filename='img/compass.png') }}" alt="Compass Face">
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="card">
+            <div class="card compact-card">
                 <h2>Moon Phase</h2>
                 <div class="bigicon">{{ moon.icon }}</div>
                 <p>{{ moon.description }}</p>
@@ -55,10 +55,9 @@
             <div class="card">
                 <h2>Forecast</h2>
                 <div class="icon">📅</div>
-                <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
                 <table>
                     <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th><th>Chance</th></tr>
-                    {% for f in bom_forecasts[1:7] %}
+                    {% for f in bom_forecasts[1:6] %}
                     <tr>
                         <td>{{ f.date }}</td>
                         <td>{{ f.min }}</td>
