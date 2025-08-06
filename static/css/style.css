@@ -29,7 +29,7 @@ body {
     padding: 1em;
     box-sizing: border-box;
     scroll-snap-align: start;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 90px);
 }
 
 .card {
@@ -60,12 +60,12 @@ body {
 }
 
 .card table {
-    font-size: 0.85em;
+    font-size: 0.75em;
     letter-spacing: 0.3px;
 }
 
 .card td, .card th {
-    padding: 0.3em 0.4em;
+    padding: 0.2em 0.3em;
     font-weight: normal;
 }
 
