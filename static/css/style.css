@@ -302,3 +302,18 @@ canvas {
     line-height: 1.2em;
     margin: 0.2em 0;
 }
+
+/* Old iPad landscape fit */
+@media (max-height: 620px) and (orientation: landscape) {
+  .page { padding-top: 0.5em; padding-bottom: 0.5em; gap: 0.4em; }
+  .card { padding: 0.4em; }
+  .card h2 { font-size: 1.6em; }
+
+  /* Downsize the big visuals a touch */
+  .wind-compass-container { width: 150px; height: 150px; }
+  #analogClock { width: 130px; height: 130px; }
+  .pressure-card canvas, .pressure-card img { max-height: 200px; width: auto; }
+
+  /* Tighten the forecast table */
+  .card table { font-size: 0.70em; }
+}
