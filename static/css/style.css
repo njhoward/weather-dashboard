@@ -1,3 +1,5 @@
+html, body { height: 100%; -webkit-text-size-adjust: 100%; }
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -11,8 +13,8 @@ body {
     overflow-x: auto;
     scroll-behavior: smooth;
     width: 100vw;
-    height: 100vh;
-    touch-action: none; 
+    height: var(--app-h, calc(var(--vh, 1vh) * 100)); /* fallback if header not found */
+    touch-action: none;
     position: relative;
     scrollbar-width: none;
 }
@@ -29,7 +31,7 @@ body {
     padding: 1em;
     box-sizing: border-box;
     scroll-snap-align: start;
-    height: calc(100vh - 160px);
+    height: calc(var(--app-h, var(--vh, 1vh) * 100) - 0px); /* no extra vh math */
 }
 
 .card {

@@ -1,3 +1,23 @@
+(function () {
+  function setVH() {
+    // true visible height in px
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    // subtract the header so pages fit without vertical scroll
+    const header = document.querySelector('.top-bar');
+    const headerH = header ? header.offsetHeight : 0;
+    const appHpx = Math.max(0, Math.floor(window.innerHeight - headerH));
+    document.documentElement.style.setProperty('--app-h', `${appHpx}px`);
+  }
+
+  ['load', 'resize', 'orientationchange', 'pageshow'].forEach(ev =>
+    window.addEventListener(ev, setVH, { passive: true })
+  );
+  setVH();
+})();
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".pages");
     const pages = Array.from(container.children);
