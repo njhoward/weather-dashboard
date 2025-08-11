@@ -5,7 +5,7 @@
     if (!pages) return;
 
     var headerH = header ? header.offsetHeight : 0;
-    var h = Math.max(0, window.innerHeight - headerH); // e.g. 704 - 101 = 603
+    var h = Math.max(0, window.innerHeight - headerH -6); // e.g. 704 - 101 = 603
 
     // Apply explicit pixel heights (works on iOS 10)
     pages.style.height = h + 'px';
@@ -132,7 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
       '.pages offsetHeight: ' + (pages ? pages.offsetHeight : 0),
       '.pages computed height: ' + csPages.height,
       '.page offsetHeight: ' + (page ? page.offsetHeight : 0),
-      '.page computed height: ' + csPage.height
+      '.page computed height: ' + csPage.height,
+      'pages clientHeight: ' + pages.clientHeight,
+      'pages scrollHeight: ' + pages.scrollHeight,
+      'page  clientHeight: ' + (page ? page.clientHeight : 0),
+      'page  scrollHeight: ' + (page ? page.scrollHeight : 0)
     ];
 
     var el = document.getElementById('vh-debug');
