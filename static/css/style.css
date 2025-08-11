@@ -244,21 +244,7 @@ canvas {
     box-shadow: 0 0 6px rgba(0,0,0,0.3);
 }
 
-.wind-compass-container {
-    width: 160px;
-    height: 160px;
-    margin: 0.2em auto 0.2em auto;
-}
 
-.wind-compass-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    pointer-events: none;
-    user-select: none;
-}
 
 .wind-speed {
     position: absolute;
@@ -269,13 +255,30 @@ canvas {
     color: #ccc;
 }
 
+.wind-compass-container {
+    position: relative;            /* <-- key fix */
+    width: 160px;
+    height: 160px;
+    margin: 0.2em auto;
+}
+
+.wind-compass-container img {
+    position: absolute;
+    inset: 0;                      /* top/right/bottom/left: 0 */
+    width: 100%;
+    height: 100%;                  /* fill the square */
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+}
+
 .compass-face {
     z-index: 1;
 }
 
 .compass-needle {
     z-index: 2;
-    transform-origin: 50% 50%;
+    transform-origin: 50% 50%;     /* adjust to 50% 54% if pivot looks high */
     transition: transform 0.5s ease-in-out;
 }
 
