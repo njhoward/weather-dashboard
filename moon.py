@@ -1,3 +1,5 @@
+#moon.py 
+
 import ephem
 import datetime
 
@@ -14,7 +16,7 @@ def get_moon_phase(lat, long):
     # Determine waxing or waning
     next_full = ephem.next_full_moon(now)
     previous_full = ephem.previous_full_moon(now)
-    waxing = now < next_full
+    waxing = ephem.next_full_moon(now) < ephem.next_new_moon(now)
 
     icon = get_moon_phase_icon(phase, waxing)
     desc = get_moon_phase_desc(phase, waxing)
