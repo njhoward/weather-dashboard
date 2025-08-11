@@ -1,21 +1,26 @@
 (function () {
-  function setVH() {
-    // true visible height in px
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  function setHeights() {
+    var header = document.querySelector('.top-bar');
+    var pages  = document.querySelector('.pages');
+    if (!pages) return;
 
-    // subtract the header so pages fit without vertical scroll
-    const header = document.querySelector('.top-bar');
-    const headerH = header ? header.offsetHeight : 0;
-    const appHpx = Math.max(0, Math.floor(window.innerHeight - headerH));
-    document.documentElement.style.setProperty('--app-h', `${appHpx}px`);
+    var headerH = header ? header.offsetHeight : 0;
+    var h = Math.max(0, window.innerHeight - headerH); // e.g. 704 - 101 = 603
+
+    // Apply explicit pixel heights (works on iOS 10)
+    pages.style.height = h + 'px';
+    var pageEls = document.querySelectorAll('.page');
+    for (var i = 0; i < pageEls.length; i++) {
+      pageEls[i].style.height = h + 'px';
+    }
   }
 
-  ['load', 'resize', 'orientationchange', 'pageshow'].forEach(ev =>
-    window.addEventListener(ev, setVH, { passive: true })
-  );
-  setVH();
+  ['load','resize','orientationchange','pageshow'].forEach(function (ev) {
+    window.addEventListener(ev, setHeights, { passive: true });
+  });
+  setHeights();
 })();
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -109,43 +114,3 @@ document.addEventListener("DOMContentLoaded", () => {
         rotateNeedle(degrees);
     }
 });
-
-(function () {
-  function report() {
-    var page   = document.querySelector('.page');
-    var pages  = document.querySelector('.pages');
-    var header = document.querySelector('.top-bar');
-    var csPage = page ? getComputedStyle(page) : { height: 'n/a' };
-    var csPages= pages ? getComputedStyle(pages): { height: 'n/a' };
-
-    var lines = [
-      'window.innerHeight: ' + window.innerHeight,
-      'outerHeight: ' + window.outerHeight,
-      'docEl.clientHeight: ' + document.documentElement.clientHeight,
-      'body.clientHeight: ' + document.body.clientHeight,
-      '.top-bar offsetHeight: ' + (header ? header.offsetHeight : 0),
-      '.pages offsetHeight: ' + (pages ? pages.offsetHeight : 0),
-      '.pages computed height: ' + csPages.height,
-      '.page offsetHeight: ' + (page ? page.offsetHeight : 0),
-      '.page computed height: ' + csPage.height
-    ];
-
-    var el = document.getElementById('vh-debug');
-    if (!el) {
-      el = document.createElement('pre');
-      el.id = 'vh-debug';
-      Object.assign(el.style, {
-        position: 'fixed', right: '6px', bottom: '6px', zIndex: 9999,
-        background: 'rgba(0,0,0,.7)', color: '#0ff',
-        font: '12px/1.3 monospace', padding: '6px 8px',
-        border: '1px solid #0ff', borderRadius: '6px'
-      });
-      document.body.appendChild(el);
-    }
-    el.textContent = lines.join('\n');
-  }
-  ['load','resize','orientationchange','pageshow'].forEach(ev =>
-    window.addEventListener(ev, report, { passive: true })
-  );
-  setTimeout(report, 50);
-})();

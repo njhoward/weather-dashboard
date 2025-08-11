@@ -13,7 +13,7 @@ body {
     overflow-x: auto;
     scroll-behavior: smooth;
     width: 100vw;
-    height: var(--app-h, calc(var(--vh, 1vh) * 100)); /* fallback if header not found */
+    height: auto;
     touch-action: none;
     position: relative;
     scrollbar-width: none;
@@ -31,7 +31,7 @@ body {
     padding: 1em;
     box-sizing: border-box;
     scroll-snap-align: start;
-    height: calc(var(--app-h, var(--vh, 1vh) * 100) - 0px); /* no extra vh math */
+    height: auto; 
 }
 
 .card {
