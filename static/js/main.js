@@ -30,9 +30,9 @@ function sizeVisuals() {
   var rowH = (page.clientHeight - pt - pb - gap) / 2;
 
   // ↓↓↓ knobs — smaller number = bigger dial
-  var WIND_RESERVE     = 105;  // was 120
-  var PRESSURE_RESERVE = 95;   // was 110
-  var TIME_RESERVE     = 140;  // leave time as-is
+  var WIND_RESERVE     = 70; 
+  var PRESSURE_RESERVE = 50; 
+  var TIME_RESERVE     = 140; 
 
   function cap(el, reserveExtra) {
     if (!el) return;
