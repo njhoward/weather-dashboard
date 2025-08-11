@@ -27,8 +27,12 @@ function sizeVisuals() {
   var pt  = parseFloat(cs.paddingTop)  || 0;
   var pb  = parseFloat(cs.paddingBottom) || 0;
 
-  // height available for each of the 2 rows
   var rowH = (page.clientHeight - pt - pb - gap) / 2;
+
+  // ↓↓↓ knobs — smaller number = bigger dial
+  var WIND_RESERVE     = 105;  // was 120
+  var PRESSURE_RESERVE = 95;   // was 110
+  var TIME_RESERVE     = 140;  // leave time as-is
 
   function cap(el, reserveExtra) {
     if (!el) return;
@@ -36,22 +40,15 @@ function sizeVisuals() {
     var h2   = card ? card.querySelector('h2') : null;
     var h2h  = h2 ? h2.offsetHeight : 0;
 
-    // reserve space for heading + 2 lines of text + a little breathing room
-    var reserve = h2h + reserveExtra;        // old iPad: ~32 + (110–140)
+    var reserve = h2h + reserveExtra;
     var maxSide = Math.max(120, Math.floor(rowH - reserve));
     el.style.width  = maxSide + 'px';
     el.style.height = maxSide + 'px';
   }
 
-  // Wind: needs room for "Wind Speed" + "Gusts"
-  cap(document.querySelector('.wind-compass-container'), 120);
-
-  // Time: needs room for Date + Last Updated
-  cap(document.getElementById('analogClock'), 140);
-
-  // Pressure gauge (canvas or img inside .pressure-card)
-  var p = document.querySelector('.pressure-card canvas, .pressure-card img');
-  cap(p, 110);
+  cap(document.querySelector('.wind-compass-container'), WIND_RESERVE);
+  cap(document.querySelector('.pressure-card canvas, .pressure-card img'), PRESSURE_RESERVE);
+  cap(document.getElementById('analogClock'), TIME_RESERVE);
 }
 
 // keep your setHeights; just call sizeVisuals together with it
