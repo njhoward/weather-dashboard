@@ -109,3 +109,43 @@ document.addEventListener("DOMContentLoaded", () => {
         rotateNeedle(degrees);
     }
 });
+
+(function () {
+  function report() {
+    var page   = document.querySelector('.page');
+    var pages  = document.querySelector('.pages');
+    var header = document.querySelector('.top-bar');
+    var csPage = page ? getComputedStyle(page) : { height: 'n/a' };
+    var csPages= pages ? getComputedStyle(pages): { height: 'n/a' };
+
+    var lines = [
+      'window.innerHeight: ' + window.innerHeight,
+      'outerHeight: ' + window.outerHeight,
+      'docEl.clientHeight: ' + document.documentElement.clientHeight,
+      'body.clientHeight: ' + document.body.clientHeight,
+      '.top-bar offsetHeight: ' + (header ? header.offsetHeight : 0),
+      '.pages offsetHeight: ' + (pages ? pages.offsetHeight : 0),
+      '.pages computed height: ' + csPages.height,
+      '.page offsetHeight: ' + (page ? page.offsetHeight : 0),
+      '.page computed height: ' + csPage.height
+    ];
+
+    var el = document.getElementById('vh-debug');
+    if (!el) {
+      el = document.createElement('pre');
+      el.id = 'vh-debug';
+      Object.assign(el.style, {
+        position: 'fixed', right: '6px', bottom: '6px', zIndex: 9999,
+        background: 'rgba(0,0,0,.7)', color: '#0ff',
+        font: '12px/1.3 monospace', padding: '6px 8px',
+        border: '1px solid #0ff', borderRadius: '6px'
+      });
+      document.body.appendChild(el);
+    }
+    el.textContent = lines.join('\n');
+  }
+  ['load','resize','orientationchange','pageshow'].forEach(ev =>
+    window.addEventListener(ev, report, { passive: true })
+  );
+  setTimeout(report, 50);
+})();
