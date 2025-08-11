@@ -18,7 +18,7 @@
   ['load','resize','orientationchange','pageshow'].forEach(function (ev) {
     window.addEventListener(ev, setHeights, { passive: true });
   });
-  function sizeVisuals() {
+function sizeVisuals() {
   var page = document.querySelector('.page');
   if (!page) return;
 
@@ -30,33 +30,33 @@
   // height available for each of the 2 rows
   var rowH = (page.clientHeight - pt - pb - gap) / 2;
 
-  // leave room for heading/text inside each card
-  var visualMax = Math.max(120, Math.floor(rowH - 80));
+  function cap(el, reserveExtra) {
+    if (!el) return;
+    var card = el.closest('.card');
+    var h2   = card ? card.querySelector('h2') : null;
+    var h2h  = h2 ? h2.offsetHeight : 0;
 
-  // Wind compass
-  var w = document.getElementsByClassName('wind-compass-container');
-  for (var i = 0; i < w.length; i++) {
-    w[i].style.width  = visualMax + 'px';
-    w[i].style.height = visualMax + 'px';
+    // reserve space for heading + 2 lines of text + a little breathing room
+    var reserve = h2h + reserveExtra;        // old iPad: ~32 + (110–140)
+    var maxSide = Math.max(120, Math.floor(rowH - reserve));
+    el.style.width  = maxSide + 'px';
+    el.style.height = maxSide + 'px';
   }
 
-  // Analog clock
-  var clock = document.getElementById('analogClock');
-  if (clock) {
-    clock.style.width  = visualMax + 'px';
-    clock.style.height = visualMax + 'px';
-  }
+  // Wind: needs room for "Wind Speed" + "Gusts"
+  cap(document.querySelector('.wind-compass-container'), 120);
+
+  // Time: needs room for Date + Last Updated
+  cap(document.getElementById('analogClock'), 140);
 
   // Pressure gauge (canvas or img inside .pressure-card)
-  var pcs = document.querySelectorAll('.pressure-card canvas, .pressure-card img');
-  for (var j = 0; j < pcs.length; j++) {
-    pcs[j].style.width  = visualMax + 'px';
-    pcs[j].style.height = visualMax + 'px';
-  }
+  var p = document.querySelector('.pressure-card canvas, .pressure-card img');
+  cap(p, 110);
 }
 
+// keep your setHeights; just call sizeVisuals together with it
 ['load','resize','orientationchange','pageshow'].forEach(function (ev) {
-  window.addEventListener(ev, function(){ setHeights(); sizeVisuals(); }, { passive: true });
+  window.addEventListener(ev, function () { setHeights(); sizeVisuals(); }, { passive: true });
 });
 setHeights(); sizeVisuals();
 })();
