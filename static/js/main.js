@@ -18,7 +18,47 @@
   ['load','resize','orientationchange','pageshow'].forEach(function (ev) {
     window.addEventListener(ev, setHeights, { passive: true });
   });
-  setHeights();
+  function sizeVisuals() {
+  var page = document.querySelector('.page');
+  if (!page) return;
+
+  var cs = window.getComputedStyle(page);
+  var gap = parseFloat(cs.rowGap || cs.gap) || 0;
+  var pt  = parseFloat(cs.paddingTop)  || 0;
+  var pb  = parseFloat(cs.paddingBottom) || 0;
+
+  // height available for each of the 2 rows
+  var rowH = (page.clientHeight - pt - pb - gap) / 2;
+
+  // leave room for heading/text inside each card
+  var visualMax = Math.max(120, Math.floor(rowH - 80));
+
+  // Wind compass
+  var w = document.getElementsByClassName('wind-compass-container');
+  for (var i = 0; i < w.length; i++) {
+    w[i].style.width  = visualMax + 'px';
+    w[i].style.height = visualMax + 'px';
+  }
+
+  // Analog clock
+  var clock = document.getElementById('analogClock');
+  if (clock) {
+    clock.style.width  = visualMax + 'px';
+    clock.style.height = visualMax + 'px';
+  }
+
+  // Pressure gauge (canvas or img inside .pressure-card)
+  var pcs = document.querySelectorAll('.pressure-card canvas, .pressure-card img');
+  for (var j = 0; j < pcs.length; j++) {
+    pcs[j].style.width  = visualMax + 'px';
+    pcs[j].style.height = visualMax + 'px';
+  }
+}
+
+['load','resize','orientationchange','pageshow'].forEach(function (ev) {
+  window.addEventListener(ev, function(){ setHeights(); sizeVisuals(); }, { passive: true });
+});
+setHeights(); sizeVisuals();
 })();
 
 
