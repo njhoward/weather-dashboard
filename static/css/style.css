@@ -256,17 +256,20 @@ canvas {
 }
 
 .wind-compass-container {
-    position: relative;            /* <-- key fix */
-    width: 160px;
+    position: relative;
+    display: flex;               /* centers inside parent */
+    align-items: center;
+    justify-content: center;
+    width: 160px;                 /* your chosen size */
     height: 160px;
-    margin: 0.2em auto;
+    margin: 0.2em auto;           /* ensures center in card */
 }
 
 .wind-compass-container img {
     position: absolute;
-    inset: 0;                      /* top/right/bottom/left: 0 */
+    inset: 0;
     width: 100%;
-    height: 100%;                  /* fill the square */
+    height: 100%;
     object-fit: contain;
     pointer-events: none;
     user-select: none;
