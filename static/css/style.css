@@ -29,7 +29,7 @@ body {
     padding: 1em;
     box-sizing: border-box;
     scroll-snap-align: start;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 160px);
 }
 
 .card {
@@ -150,7 +150,6 @@ canvas {
     margin: auto;
 }
 
-/* ========== PRESSURE CARD FLIP ========== */
 .pressure-card {
     perspective: 1000px;
     position: relative;
@@ -213,7 +212,6 @@ canvas {
     line-height: 1;
 }
 
-/* ========== Pressure History Table ========== */
 .pressure-history {
     width: 100%;
     color: #eee;
@@ -224,7 +222,6 @@ canvas {
     padding: 0.25em 0.5em;
 }
 
-/* ========== Flip Back Button ========== */
 .flip-back {
     margin-top: 0.5em;
     padding: 0.25em 0.5em;
@@ -244,8 +241,6 @@ canvas {
     box-shadow: 0 0 6px rgba(0,0,0,0.3);
 }
 
-
-
 .wind-speed {
     position: absolute;
     bottom: -0.8em;
@@ -262,43 +257,27 @@ canvas {
   margin: 0.2em auto;
 }
 
-/* Needle fills the box */
 .wind-compass-container .compass-needle {
   position: absolute;
   left: 0; top: 0;
   width: 100%; height: 100%;
-  transform-origin: 50% 50%;      /* tweak to 50% 54% if pivot looks high */
+  transform-origin: 50% 50%;    
   transition: transform 0.5s ease-in-out;
   z-index: 2;
   pointer-events: none;
   user-select: none;
 }
 
-/* Face is hard-centered to avoid iOS 10 rounding quirks */
 .wind-compass-container .compass-face {
   position: absolute;
   left: 50%; top: 50%;
-  right: auto; bottom: auto;      /* important: cancel any generic img rule */
+  right: auto; bottom: auto;
   width: 100%; height: 100%;
   transform: translate(-50%, -50%);
   z-index: 1;
   pointer-events: none;
   user-select: none;
 }
-
-/*
-
-.compass-face {
-    z-index: 1;
-}
-
-.compass-needle {
-    z-index: 2;
-    transform-origin: 50% 50%;      adjust to 50% 54% if pivot looks high
-    transition: transform 0.5s ease-in-out;
-}
-
-*/
 
 .compact-card {
     justify-content: flex-start;
