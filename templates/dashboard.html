@@ -28,7 +28,7 @@
                 <p>Temp: {{ weather.temp }}°C</p>
                 <p>Humidity: {{ weather.humidity }}%</p>
                 <p>Feels Like: {{ weather.apparent_t }}°C</p>
-                <p>Min: {{bom_forecasts[0].min}}, Max: {{bom_forecasts[0].max}}</p>
+                <p>Min: {{ bom_forecasts[0].min }}, Max: {{ bom_forecasts[0].max }}</p>
             </div>
 
             <!-- Card 2 -->
@@ -39,7 +39,7 @@
                     <img class="compass-needle" id="wind-needle" src="{{ url_for('static', filename='img/needle.png') }}"
                         alt="Needle" data-winddir="{{ weather.winddir }}">
                 </div>
-                <p>Wind Speed: {{ weather.windkmh }} km/h</p>
+                <p>Wind Speed: {{ weather.windkmh }} km/h {{ weather.winddir }}</p>
                 <p>Gusts: {{ weather.gustkmh }} km/h</p>
             </div>
 
