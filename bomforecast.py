@@ -51,6 +51,7 @@ def get_bom_forecast(bomurl):
         rain_chance = block.select_one("dd.pop")
         rain_amt = block.select_one("dd.amt")
         icon = block.select_one("dd.image img")
+        
 
         day_text, date_text = "", ""
         if date_el:
@@ -72,7 +73,8 @@ def get_bom_forecast(bomurl):
             "max": strip_units(max_temp.text) if max_temp else "",
             "rain_amt": strip_units(rain_amt.text) if rain_amt else "",
             "chance_of_rain": rain_chance.text.strip() if rain_chance else "",
-            "icon_desc": icon["alt"] if icon else ""
+            "icon_desc": icon["alt"] if icon else "",
+            "icon_url": f"https://www.bom.gov.au{icon['src']}" if icon and icon.get("src") else ""
         })
 
 

@@ -67,6 +67,15 @@
                     </tr>
 
                     <tr>
+                        <td></td>
+                        {% for f in bom_forecasts[1:6] %}
+                            <td>
+                                <img src="{{ f.icon_url }}" />
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
                         <td>Min</td>
                         {% for f in bom_forecasts[1:6] %}
                             <td>{{ f.min }}</td>
