@@ -317,3 +317,7 @@ canvas {
   /* Tighten the forecast table */
   .card table { font-size: 0.70em; }
 }
+
+.hide {
+    visibility: hidden;
+}

@@ -146,38 +146,48 @@
 
 
             <!-- CARD 1-->
-
-            <div class="card">
-                <h2>Debugging</h2>
-                <div class="icon">🐞</div>
-                <p>Location: {{ general.location }}</p>
-                <p>Country: {{ general.country }}</p>
-                <p>Latitude: {{ general.lat }}</p>
-                <p>Longitude: {{ general.long }}</p>
-                <p>BOM URL: {{ general.bom_url }}</p>
-                <p>Forecast URL: {{ general.forecast_url }}</p>
-            </div>
-
-            <!-- CARD 2-->
             <div class="card">
                 <h2>Forecast</h2>
                 <div class="icon">📅</div>
                 <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
                 <table>
-                    <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th><th>Chance</th></tr>
-                    {% for f in bom_forecasts[1:7] %}
                     <tr>
-                        <td>{{ f.date }}</td>
-                        <td>{{ f.min }}</td>
-                        <td>{{ f.max }}</td>
-                        <td>{{ f.rain_amt }}</td>
-                        <td>{{ f.chance_of_rain }}</td>
+                        <th></th>
+                        {% for f in bom_forecasts[1:7] %}
+                            <th>{{ f.date }}</th>
+                        {% endfor %}
                     </tr>
-                    {% endfor %}
+
+                    <tr>
+                        <td>Min</td>
+                        {% for f in bom_forecasts[1:7] %}
+                            <td>{{ f.min }}°</td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Max</td>
+                       {% for f in bom_forecasts[1:7] %}
+                            <td>{{ f.max }}°</td>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Rain</td>
+                       {% for f in bom_forecasts[1:7] %}
+                            <td>{{ f.rain_amt }}mm</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>Chance</td>
+                       {% for f in bom_forecasts[1:7] %}
+                            <td>{{ f.chance_of_rain }}mm</td>
+                        {% endfor %}
+                    </tr>
                 </table>
             </div>
 
-            <!-- Card 3 -->
+            <!-- CARD 2-->
             <div class="card">
                 <h2>Forecast</h2>
                 <div class="icon">📅</div>
@@ -211,6 +221,22 @@
                     </tr>
                 </table>
             </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <h2>Debugging</h2>
+                <div class="icon">🐞</div>
+                <p>Location: {{ general.location }}</p>
+                <p>Country: {{ general.country }}</p>
+                <p>Latitude: {{ general.lat }}</p>
+                <p>Longitude: {{ general.long }}</p>
+                <p>BOM URL: {{ general.bom_url }}</p>
+                <p>Forecast URL: {{ general.forecast_url }}</p>
+            </div>
+
+            
+            
+            
 
 
         </div>
