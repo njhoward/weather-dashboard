@@ -58,7 +58,6 @@
             <div class="card">
                 <h2>Forecast</h2>
                 <div class="icon">📅</div>
-                <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
                 <table>
                     <tr>
                         <th></th>
@@ -176,6 +175,7 @@
             <div class="card">
                 <h2>Forecast</h2>
                 <div class="icon">📅</div>
+                <p><strong>{{ bom_issued or 'Issued time unavailable' }}</strong></p>
                 <table>
                     <tr><th>Day</th><th>Min</th><th>Max</th><th>Rain</th><th>Chance</th></tr>
                     {% for f in bom_forecasts[1:6] %}
