@@ -70,7 +70,7 @@ def get_bom_forecast(bomurl):
             "date": date_text,
             "min": strip_units(min_temp.text) if min_temp else "",
             "max": strip_units(max_temp.text) if max_temp else "",
-            "rain_amt": rain_amt.text.strip() if rain_amt else "",
+            "rain_amt": strip_units(rain_amt.text) if rain_amt else "",
             "chance_of_rain": rain_chance.text.strip() if rain_chance else "",
             "icon_desc": icon["alt"] if icon else ""
         })
