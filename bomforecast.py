@@ -67,8 +67,8 @@ def get_bom_forecast(bomurl):
         forecasts.append({
             "day": day_text,
             "date": date_text,
-            "min": min_temp.text.strip() if min_temp else "",
-            "max": max_temp.text.strip() if max_temp else "",
+            "min": strip_units(min_temp.text) if min_temp else "",
+            "max": strip_units(max_temp.text) if max_temp else "",
             "rain_amt": rain_amt.text.strip() if rain_amt else "",
             "chance_of_rain": rain_chance.text.strip() if rain_chance else "",
             "icon_desc": icon["alt"] if icon else ""
@@ -77,7 +77,10 @@ def get_bom_forecast(bomurl):
 
     return {"issued": issued_at, "daily": forecasts}
 
-
+def strip_units(text):
+            if not text:
+                return ""
+            return re.sub(r"[^\d\-–to ]", "", text).strip()
 
 def load_fallback_html(path="static/html/sydney.html"):
     try:
