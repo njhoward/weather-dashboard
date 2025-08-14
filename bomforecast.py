@@ -44,21 +44,36 @@ def get_bom_forecast(bomurl):
             return {"issued": issued_at, "daily": forecasts}
 
     for block in forecast_blocks:
-        date = block.select_one("dt.date a")
+        date_el = block.select_one("dt.date a")
         min_temp = block.select_one("dd.min")
         max_temp = block.select_one("dd.max")
-        rain_amt = block.select_one("dd.amt")
         rain_chance = block.select_one("dd.pop")
+        rain_amt = block.select_one("dd.amt")
         icon = block.select_one("dd.image img")
 
+        day_text, date_text = "", ""
+        if date_el:
+            full_text = date_el.text.strip()
+            # For example: "Fri 1 Aug" or "Rest of Thursday"
+            parts = full_text.split(" ", 1)
+            if len(parts) == 2 and parts[0].isalpha():
+                day_text = parts[0]
+                date_text = parts[1]
+            else:
+                # Handle cases like "Rest of Thursday"
+                day_text = full_text
+                date_text = ""
+
         forecasts.append({
-                "date": date.text.strip() if date else "N/A",
-                "min": min_temp.text.strip() if min_temp else "N/A",
-                "max": max_temp.text.strip() if max_temp else "N/A",
-                "rain_amt": rain_amt.text.strip() if rain_amt else "",
-                "chance_of_rain": rain_chance.text.strip() if rain_chance else "",
-                "icon_desc": icon["alt"] if icon else ""
-            })
+            "day": day_text,
+            "date": date_text,
+            "min": min_temp.text.strip() if min_temp else "",
+            "max": max_temp.text.strip() if max_temp else "",
+            "rain_amt": rain_amt.text.strip() if rain_amt else "",
+            "chance_of_rain": rain_chance.text.strip() if rain_chance else "",
+            "icon_desc": icon["alt"] if icon else ""
+        })
+
 
     return {"issued": issued_at, "daily": forecasts}
 
