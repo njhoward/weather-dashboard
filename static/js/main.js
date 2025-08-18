@@ -193,5 +193,5 @@ document.addEventListener("DOMContentLoaded", () => {
   ['load','resize','orientationchange','pageshow'].forEach(ev =>
     window.addEventListener(ev, report, { passive: true })
   );
-  //setTimeout(report, 50);
+  setTimeout(report, 50);
 })();
