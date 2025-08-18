@@ -177,17 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     var el = document.getElementById('vh-debug');
-    if (!el) {
-      el = document.createElement('pre');
-      el.id = 'vh-debug';
-      Object.assign(el.style, {
-        position: 'fixed', right: '6px', bottom: '6px', zIndex: 9999,
-        background: 'rgba(0,0,0,.7)', color: '#0ff',
-        font: '12px/1.3 monospace', padding: '6px 8px',
-        border: '1px solid #0ff', borderRadius: '6px'
-      });
-      document.body.appendChild(el);
-    }
     el.textContent = lines.join('\n');
   }
   ['load','resize','orientationchange','pageshow'].forEach(ev =>
